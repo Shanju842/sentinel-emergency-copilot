@@ -4,502 +4,567 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#07090d">
-
 <title>SENTINEL — Emergency Copilot</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-:root{
-  --bg:#07090d;
-  --panel:#10141c;
-  --panel2:#151b25;
-  --text:#f4f7fb;
-  --muted:#8994a6;
-  --accent:#ffb52e;
-  --danger:#ff5b5b;
-  --success:#46d477;
-  --line:#252c38;
-  --blue:#4d7cff;
+:root {
+  --bg: #07090d;
+  --card: #10151e;
+  --card2: #161d28;
+  --line: #293342;
+  --text: #f5f7fa;
+  --muted: #8995a6;
+  --yellow: #ffb52e;
+  --green: #42dc78;
+  --blue: #4d8dff;
+  --red: #ff5757;
 }
 
-body{
+body {
+  background: #000;
+  color: var(--text);
   font-family:
     Inter,
-    system-ui,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-
-  background:#000;
-  color:var(--text);
-  min-height:100vh;
+  min-height: 100vh;
 }
 
-button{
-  font:inherit;
-  border:0;
-  cursor:pointer;
+/* APP */
+
+.app {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: auto;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      #111a29 0%,
+      #07090d 38%
+    );
+  padding-bottom: 30px;
 }
 
-.app{
-  width:100%;
-  max-width:480px;
-  min-height:100vh;
-  margin:auto;
-  background:var(--bg);
-  position:relative;
-  overflow:hidden;
+/* HEADER */
+
+header {
+  height: 70px;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header{
-  height:74px;
-  padding:22px 22px 12px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+.logo {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 2px;
 }
 
-.brand{
-  font-size:21px;
-  font-weight:800;
-  letter-spacing:2px;
+.status {
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  color: #8e99a8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.status{
-  display:flex;
-  align-items:center;
-  gap:7px;
-
-  color:#8f9aaa;
-  font-size:10px;
-  letter-spacing:1px;
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green);
 }
 
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--success);
-  box-shadow:0 0 12px var(--success);
+/* MAIN */
+
+main {
+  padding: 0 20px;
 }
 
-main{
-  padding:10px 20px 35px;
+.kicker {
+  color: var(--yellow);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-top: 12px;
+  margin-bottom: 10px;
 }
 
-.hero{
-  padding:22px 2px 25px;
+h1 {
+  font-size: 38px;
+  line-height: 0.98;
+  letter-spacing: -2px;
+  margin-bottom: 12px;
 }
 
-.kicker{
-  color:var(--accent);
-  font-size:10px;
-  letter-spacing:2px;
-  font-weight:700;
-  margin-bottom:12px;
+.subtitle {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  max-width: 400px;
+  margin-bottom: 22px;
 }
 
-h1{
-  font-size:38px;
-  line-height:1.02;
-  letter-spacing:-1.8px;
-  margin-bottom:14px;
-}
+/* CAMERA */
 
-.hero p{
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.55;
-  max-width:390px;
-}
-
-.scan{
-  position:relative;
-
-  height:300px;
-
-  border:1px solid var(--line);
-  border-radius:25px;
-
-  overflow:hidden;
+.camera {
+  height: 300px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
 
   background:
     radial-gradient(
-      circle at 50% 45%,
-      #263142 0,
-      #111722 30%,
-      #080b10 72%
+      circle at center,
+      #263244 0%,
+      #111722 35%,
+      #080b10 75%
     );
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-.scan::before,
-.scan::after{
-  content:"";
-
-  position:absolute;
-
-  width:55px;
-  height:55px;
-
-  z-index:4;
-  pointer-events:none;
+.camera video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.scan::before{
-  left:18px;
-  top:18px;
-
-  border-left:2px solid var(--accent);
-  border-top:2px solid var(--accent);
+.camera-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.scan::after{
-  right:18px;
-  bottom:18px;
-
-  border-right:2px solid var(--accent);
-  border-bottom:2px solid var(--accent);
+.corner {
+  position: absolute;
+  width: 48px;
+  height: 48px;
 }
 
-.camera-icon{
-  width:110px;
-  height:110px;
-
-  border:2px solid #6f7b8d;
-  border-radius:50%;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:38px;
-  color:#d9dee6;
-
-  background:#0b0f15aa;
+.corner.tl {
+  top: 18px;
+  left: 18px;
+  border-top: 2px solid var(--yellow);
+  border-left: 2px solid var(--yellow);
 }
 
-.camera-video{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-  display:block;
+.corner.br {
+  right: 18px;
+  bottom: 18px;
+  border-right: 2px solid var(--yellow);
+  border-bottom: 2px solid var(--yellow);
 }
 
-.scan-label{
-  position:absolute;
-
-  left:18px;
-  bottom:18px;
-
-  z-index:5;
-
-  font-size:9px;
-  letter-spacing:1.5px;
-
-  color:#d4dae4;
-
-  background:#07090dcc;
-
-  padding:6px 8px;
-  border-radius:7px;
+.camera-status {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  font-size: 9px;
+  letter-spacing: 1.4px;
+  color: #b8c1ce;
 }
 
-.controls{
-  display:grid;
+.target {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
-  grid-template-columns:1fr 1fr;
+  width: 95px;
+  height: 95px;
 
-  gap:12px;
+  border: 1px solid #8996aa;
+  border-radius: 50%;
 
-  margin-top:15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 3;
 }
 
-.primary{
-  grid-column:1/-1;
+.target:after {
+  content: "";
+  width: 12px;
+  height: 12px;
 
-  height:62px;
+  border: 2px solid white;
+  border-radius: 50%;
+}
 
-  border-radius:18px;
+/* BUTTONS */
 
-  background:var(--accent);
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
 
-  color:#101010;
+.start {
+  width: 100%;
+  height: 60px;
 
-  font-weight:800;
+  margin-top: 14px;
 
-  letter-spacing:1px;
+  border: 0;
+  border-radius: 17px;
 
-  font-size:15px;
+  background: var(--yellow);
+  color: #111;
 
+  font-weight: 900;
+  letter-spacing: 1px;
+
+  transition: 0.2s;
+}
+
+.start:hover {
+  filter: brightness(1.08);
+}
+
+.start:active {
+  transform: scale(0.985);
+}
+
+.two-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.secondary {
+  height: 48px;
+
+  background: var(--card);
+  color: #cbd3df;
+
+  border: 1px solid var(--line);
+  border-radius: 14px;
+
+  font-weight: 700;
+}
+
+.secondary:hover {
+  border-color: #465368;
+}
+
+/* SCENARIOS */
+
+.scenarios {
+  margin-top: 25px;
+}
+
+.section-label {
+  color: #707c8d;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  margin-bottom: 10px;
+}
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.scenario {
+  min-height: 88px;
+
+  text-align: left;
+
+  background: var(--card);
+  color: white;
+
+  border: 1px solid var(--line);
+  border-radius: 15px;
+
+  padding: 13px 10px;
+
+  transition: 0.2s;
+}
+
+.scenario:hover {
+  transform: translateY(-1px);
+}
+
+.scenario.active {
+  border-color: var(--blue);
   box-shadow:
-    0 10px 35px #ffb52e20;
+    0 0 0 1px #4d8dff33,
+    0 0 20px #4d8dff12;
 }
 
-.primary:active{
-  transform:scale(.98);
+.icon {
+  font-size: 17px;
+  margin-bottom: 10px;
 }
 
-.secondary{
-  height:52px;
-
-  border-radius:15px;
-
-  background:var(--panel);
-
-  border:1px solid var(--line);
-
-  color:#c8d0dc;
+.scenario strong {
+  display: block;
+  font-size: 12px;
 }
 
-.secondary:active{
-  transform:scale(.98);
+.scenario span {
+  color: #788496;
+  font-size: 9px;
 }
 
-.capture{
-  display:none;
+/* FRAME STATUS */
 
-  grid-column:1/-1;
+.frame-status {
+  display: none;
 
-  height:55px;
+  margin-top: 10px;
 
-  border-radius:15px;
+  padding: 11px 13px;
 
-  background:#151c28;
+  border-radius: 11px;
 
-  border:1px solid #344154;
+  background: #102016;
+  border: 1px solid #244b30;
 
-  color:#f4f7fb;
+  color: #63df88;
 
-  font-weight:800;
-
-  letter-spacing:.8px;
+  font-size: 9px;
+  letter-spacing: 1px;
 }
 
-.capture.show{
-  display:block;
+.frame-status.show {
+  display: block;
 }
 
-.modes{
-  margin-top:28px;
-}
+/* RESULT */
 
-.section-title{
-  font-size:10px;
+.result {
+  display: none;
 
-  color:#7f8998;
+  margin-top: 15px;
 
-  letter-spacing:1.8px;
+  padding: 18px;
 
-  margin-bottom:12px;
-}
+  border-radius: 20px;
 
-.mode-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:9px;
-}
-
-.mode{
-  background:var(--panel);
-
-  border:1px solid var(--line);
-
-  border-radius:16px;
-
-  padding:16px 10px;
-
-  min-height:100px;
-
-  text-align:left;
-
-  color:white;
-}
-
-.mode.active{
-  border-color:var(--blue);
-
-  box-shadow:
-    0 0 0 1px #4d7cff33,
-    inset 0 0 25px #4d7cff08;
-}
-
-.mode strong{
-  display:block;
-
-  font-size:13px;
-
-  margin-top:12px;
-}
-
-.mode span{
-  color:#7f8998;
-
-  font-size:10px;
-}
-
-.result{
-  display:none;
-
-  margin-top:20px;
-
-  border:1px solid #35404e;
-
-  border-radius:20px;
-
-  padding:20px;
+  border: 1px solid var(--line);
 
   background:
     linear-gradient(
       145deg,
-      #121923,
+      #151c27,
       #0d1118
     );
 }
 
-.result.show{
-  display:block;
+.result.show {
+  display: block;
 }
 
-.result-head{
-  display:flex;
+.result-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  justify-content:space-between;
-  align-items:center;
-
-  margin-bottom:18px;
+  margin-bottom: 14px;
 }
 
-.result-label{
-  font-size:9px;
-
-  letter-spacing:1.7px;
-
-  color:#8e99a9;
+.result-state {
+  font-size: 8px;
+  color: #8490a0;
+  letter-spacing: 1.5px;
 }
 
-.risk{
-  color:var(--accent);
-
-  font-size:10px;
-
-  font-weight:700;
+.priority {
+  font-size: 8px;
+  color: var(--yellow);
+  font-weight: 800;
+  letter-spacing: 1px;
 }
 
-.result h2{
-  font-size:22px;
-
-  margin-bottom:10px;
+.result h2 {
+  font-size: 21px;
+  margin-bottom: 8px;
 }
 
-.result p{
-  color:#aab4c3;
-
-  font-size:13px;
-
-  line-height:1.55;
+.result-description {
+  color: #9ba6b5;
+  font-size: 12px;
+  line-height: 1.5;
 }
 
-.guidance{
-  margin-top:17px;
+/* GUIDANCE */
 
-  padding:15px;
+.guidance {
+  margin-top: 14px;
 
-  background:#191f29;
+  padding: 14px;
 
-  border-radius:14px;
+  border-radius: 13px;
 
-  border-left:3px solid var(--accent);
+  border-left: 3px solid var(--yellow);
+
+  background: #1a202a;
 }
 
-.guidance small{
-  display:block;
+.guidance-label {
+  color: var(--yellow);
 
-  color:var(--accent);
+  font-size: 8px;
 
-  font-size:9px;
+  font-weight: 800;
 
-  letter-spacing:1.5px;
+  letter-spacing: 1.5px;
 
-  margin-bottom:7px;
+  margin-bottom: 7px;
 }
 
-.guidance b{
-  font-size:14px;
-
-  line-height:1.5;
+.guidance-text {
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 700;
 }
 
-.action-row{
-  display:grid;
+/* RESULT BUTTONS */
 
-  grid-template-columns:1fr 1fr;
+.result-buttons {
+  display: grid;
 
-  gap:10px;
+  grid-template-columns: 1fr 1fr;
 
-  margin-top:14px;
+  gap: 8px;
+
+  margin-top: 12px;
 }
 
-.action{
-  height:48px;
+.action {
+  height: 45px;
 
-  border-radius:13px;
+  border-radius: 12px;
 
-  background:#202733;
+  border: 1px solid #303b4b;
 
-  border:1px solid #303a48;
+  background: #202833;
 
-  color:white;
+  color: white;
 
-  font-weight:700;
+  font-size: 11px;
+
+  font-weight: 800;
 }
 
-.action.primary-action{
-  background:var(--accent);
-
-  color:#111;
+.action:hover {
+  border-color: #4c5c70;
 }
 
-footer{
-  padding:25px 2px 0;
-
-  text-align:center;
-
-  color:#4e5867;
-
-  font-size:9px;
-
-  letter-spacing:1.5px;
+.hear {
+  border-color: #456da8;
 }
 
-@media(min-width:700px){
+/* LOOP */
 
-  body{
-    padding:30px 0;
+.loop {
+  display: flex;
+
+  justify-content: space-between;
+
+  margin-top: 13px;
+
+  color: #5d6878;
+
+  font-size: 7px;
+
+  letter-spacing: 1px;
+}
+
+.loop .active {
+  color: var(--blue);
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+
+  color: #414b59;
+
+  font-size: 8px;
+
+  letter-spacing: 1.4px;
+
+  margin-top: 22px;
+}
+
+/* CAMERA ACTIVE */
+
+.camera.live {
+  border-color: #456da8;
+
+  box-shadow:
+    0 0 0 1px #456da822,
+    0 0 35px #456da812;
+}
+
+/* SCANNING */
+
+.scanning .target {
+  animation: scanPulse 1.2s infinite;
+}
+
+@keyframes scanPulse {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
   }
 
-  .app{
-    min-height:850px;
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.55;
+  }
+}
 
-    border-radius:30px;
+/* MOBILE */
+
+@media (max-width: 480px) {
+
+  .app {
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+}
+
+/* DESKTOP */
+
+@media (min-width: 700px) {
+
+  body {
+    padding: 30px 0;
+  }
+
+  .app {
+    min-height: 850px;
+
+    border-radius: 30px;
 
     box-shadow:
       0 30px 100px #000;
   }
+
 }
 </style>
 </head>
@@ -510,101 +575,123 @@ footer{
 
 <header>
 
-  <div class="brand">
+  <div class="logo">
     SENTINEL
   </div>
 
   <div class="status">
-    <span class="dot"></span>
-    <span id="systemStatus">LOCAL READY</span>
+
+    <span class="status-dot"></span>
+
+    LOCAL READY
+
   </div>
 
 </header>
 
+
 <main>
 
-<section class="hero">
+<!-- HERO -->
 
-  <div class="kicker">
-    EMERGENCY COPILOT
+<div class="kicker">
+  EMERGENCY COPILOT
+</div>
+
+<h1>
+  Know what's<br>
+  happening.
+</h1>
+
+<p class="subtitle">
+
+  Observe your surroundings, assess potential hazards,
+  and receive immediate safety-focused guidance.
+
+</p>
+
+
+<!-- CAMERA -->
+
+<section
+  class="camera"
+  id="camera"
+>
+
+  <div
+    class="target"
+    id="target"
+  ></div>
+
+  <div class="camera-overlay">
+
+    <div class="corner tl"></div>
+
+    <div class="corner br"></div>
+
+    <div
+      class="camera-status"
+      id="cameraStatus"
+    >
+      CAMERA STANDBY · LOCAL PROCESSING
+    </div>
+
   </div>
-
-  <h1>
-    Know what's<br>
-    happening.
-  </h1>
-
-  <p>
-    Observe your surroundings, assess potential hazards,
-    and receive immediate safety-focused guidance.
-  </p>
 
 </section>
 
-<section class="scan" id="scanArea">
 
-  <div class="camera-icon" id="cameraIcon">
-    ⌾
-  </div>
+<!-- START -->
 
-  <div class="scan-label" id="scanLabel">
-    CAMERA STANDBY · LOCAL PROCESSING
-  </div>
+<button
+  class="start"
+  id="startButton"
+  onclick="startObservation()"
+>
+  START OBSERVATION
+</button>
 
-</section>
 
-<div class="controls">
+<!-- CAMERA / VOICE -->
 
-  <button
-    class="primary"
-    id="startButton"
-    onclick="startObservation()">
-
-    START OBSERVATION
-
-  </button>
+<div class="two-buttons">
 
   <button
-    class="capture"
-    id="captureButton"
-    onclick="captureFrame()">
-
-    ◉ CAPTURE FRAME
-
+    class="secondary"
+    onclick="activateCamera()"
+  >
+    📷 CAMERA
   </button>
 
   <button
     class="secondary"
-    onclick="activateCamera()">
-
-    ● CAMERA
-
-  </button>
-
-  <button
-    class="secondary"
-    onclick="activateVoice()">
-
-    ● VOICE
-
+    onclick="activateVoice()"
+  >
+    🎙 VOICE
   </button>
 
 </div>
 
-<section class="modes">
 
-  <div class="section-title">
+<!-- SCENARIOS -->
+
+<section class="scenarios">
+
+  <div class="section-label">
     DEMO SCENARIOS
   </div>
 
-  <div class="mode-grid">
+  <div class="scenario-grid">
 
     <button
-      class="mode"
-      id="electricalMode"
-      onclick="simulate('electrical')">
+      class="scenario"
+      id="electrical"
+      onclick="selectScenario('electrical')"
+    >
 
-      ⚡
+      <div class="icon">
+        ⚡
+      </div>
 
       <strong>
         Electrical
@@ -616,12 +703,16 @@ footer{
 
     </button>
 
-    <button
-      class="mode"
-      id="fireMode"
-      onclick="simulate('fire')">
 
-      🔥
+    <button
+      class="scenario"
+      id="fire"
+      onclick="selectScenario('fire')"
+    >
+
+      <div class="icon">
+        🔥
+      </div>
 
       <strong>
         Fire / Smoke
@@ -633,12 +724,16 @@ footer{
 
     </button>
 
-    <button
-      class="mode"
-      id="roadMode"
-      onclick="simulate('road')">
 
-      🚗
+    <button
+      class="scenario"
+      id="road"
+      onclick="selectScenario('road')"
+    >
+
+      <div class="icon">
+        🚗
+      </div>
 
       <strong>
         Road
@@ -654,67 +749,111 @@ footer{
 
 </section>
 
+
+<!-- FRAME -->
+
+<div
+  class="frame-status"
+  id="frameStatus"
+>
+  ✓ FRAME CAPTURED · READY FOR LOCAL ASSESSMENT
+</div>
+
+
+<!-- RESULT -->
+
 <section
   class="result"
-  id="result">
+  id="result"
+>
 
-  <div class="result-head">
+  <div class="result-top">
 
     <span
-      class="result-label"
-      id="state">
-
-      WAITING
-
+      class="result-state"
+      id="resultState"
+    >
+      ASSESSMENT COMPLETE
     </span>
 
-    <span class="risk">
+    <span class="priority">
       SAFETY PRIORITY
     </span>
 
   </div>
 
-  <h2 id="hazardTitle">
-    Observation ready
+
+  <h2 id="resultTitle">
+    Potential Hazard
   </h2>
 
-  <p id="hazardText">
-    Start an observation or choose a demonstration scenario.
+
+  <p
+    class="result-description"
+    id="resultDescription"
+  >
+    SENTINEL is ready to assess the situation.
   </p>
+
 
   <div class="guidance">
 
-    <small>
+    <div class="guidance-label">
       IMMEDIATE GUIDANCE
-    </small>
+    </div>
 
-    <b id="guidanceText">
-      SENTINEL is ready to assess the situation.
-    </b>
+    <div
+      class="guidance-text"
+      id="guidance"
+    >
+      Move away from the potential hazard
+      and remain in a safe location.
+    </div>
 
   </div>
 
-  <div class="action-row">
+
+  <div class="result-buttons">
 
     <button
-      class="action primary-action"
-      onclick="speakGuidance()">
-
+      class="action hear"
+      onclick="hearGuidance()"
+    >
       🔊 HEAR GUIDANCE
-
     </button>
 
     <button
       class="action"
-      onclick="reassess()">
-
+      onclick="reassess()"
+    >
       ↻ REASSESS
-
     </button>
 
   </div>
 
+
+  <div class="loop">
+
+    <span class="active">
+      OBSERVE
+    </span>
+
+    <span>
+      ASSESS
+    </span>
+
+    <span>
+      GUIDE
+    </span>
+
+    <span>
+      VERIFY
+    </span>
+
+  </div>
+
 </section>
+
 
 <footer>
   OBSERVE · ASSESS · GUIDE · VERIFY
@@ -724,275 +863,169 @@ footer{
 
 </div>
 
+
 <script>
 
+let selectedScenario = null;
+
 let cameraStream = null;
-let currentScenario = null;
-let capturedImage = null;
 
 
-/* -----------------------------------
-   START OBSERVATION
------------------------------------ */
+/* SCENARIO DATA */
 
-function startObservation(){
+const scenarioData = {
 
-  const label =
-    document.getElementById("scanLabel");
+  electrical: {
+
+    title:
+      "Potential electrical hazard",
+
+    description:
+      "The scene may contain exposed or damaged electrical equipment.",
+
+    guidance:
+      "Move away from the area. Do not touch the equipment. Keep others clear and seek appropriate emergency assistance."
+
+  },
+
+  fire: {
+
+    title:
+      "Potential fire / smoke hazard",
+
+    description:
+      "Environmental cues suggest a possible fire or smoke event.",
+
+    guidance:
+      "Move away from the affected area. Avoid smoke-filled spaces. Alert others if safe and seek emergency assistance."
+
+  },
+
+  road: {
+
+    title:
+      "Potential road incident",
+
+    description:
+      "The scene may contain moving traffic and an active roadside incident.",
+
+    guidance:
+      "Move away from traffic if possible. Stay in a safe visible location and seek appropriate emergency assistance."
+
+  }
+
+};
+
+
+/* START OBSERVATION */
+
+function startObservation() {
+
+  const button =
+    document.getElementById("startButton");
+
+  const status =
+    document.getElementById("cameraStatus");
+
+  const camera =
+    document.getElementById("camera");
+
+  const target =
+    document.getElementById("target");
+
+  const frame =
+    document.getElementById("frameStatus");
 
   const result =
     document.getElementById("result");
 
-  const status =
-    document.getElementById("systemStatus");
 
-  const startButton =
-    document.getElementById("startButton");
+  button.textContent =
+    "OBSERVATION ACTIVE";
+
+  status.textContent =
+    "OBSERVING · LOCAL INPUT";
+
+  camera.classList.add("scanning");
+
+  target.style.display = "flex";
 
   result.classList.remove("show");
 
-  status.textContent="OBSERVING";
+  frame.classList.remove("show");
 
-  startButton.textContent="OBSERVATION ACTIVE";
 
-  label.textContent=
-    "OBSERVING · ANALYZING LOCAL INPUT";
+  setTimeout(function () {
 
-  setTimeout(()=>{
-
-    label.textContent=
+    status.textContent =
       "ASSESSING · SITUATION UNDERSTANDING";
 
-  },900);
+  }, 900);
 
-  setTimeout(()=>{
 
-    label.textContent=
-      "READY · CAPTURE A FRAME";
+  setTimeout(function () {
 
-    status.textContent=
-      "LOCAL READY";
+    status.textContent =
+      "FRAME CAPTURED · LOCAL ASSESSMENT";
 
-    document
-      .getElementById("captureButton")
-      .classList.add("show");
+    camera.classList.remove("scanning");
+
+    frame.classList.add("show");
 
     result.classList.add("show");
 
-    document
-      .getElementById("state")
-      .textContent=
+
+    document.getElementById(
+      "resultState"
+    ).textContent =
       "OBSERVATION ACTIVE";
 
-    document
-      .getElementById("hazardTitle")
-      .textContent=
-      "Camera observation active";
 
-    document
-      .getElementById("hazardText")
-      .textContent=
-      "Capture a frame from the camera. This frame will become the visual input for SENTINEL's assessment engine.";
-
-    document
-      .getElementById("guidanceText")
-      .textContent=
-      "Capture the current scene to continue.";
-
-  },1800);
-
-}
+    document.getElementById(
+      "resultTitle"
+    ).textContent =
+      "Observation active";
 
 
-/* -----------------------------------
-   CAMERA
------------------------------------ */
-
-async function activateCamera(){
-
-  const label =
-    document.getElementById("scanLabel");
-
-  const scan =
-    document.getElementById("scanArea");
-
-  const icon =
-    document.getElementById("cameraIcon");
-
-  try{
-
-    if(!navigator.mediaDevices ||
-       !navigator.mediaDevices.getUserMedia){
-
-      throw new Error(
-        "Camera API unavailable"
-      );
-
-    }
-
-    if(cameraStream){
-
-      cameraStream
-        .getTracks()
-        .forEach(track=>track.stop());
-
-    }
-
-    cameraStream =
-      await navigator.mediaDevices.getUserMedia({
-
-        video:{
-          facingMode:{
-            ideal:"environment"
-          },
-
-          width:{
-            ideal:1280
-          },
-
-          height:{
-            ideal:720
-          }
-        },
-
-        audio:false
-
-      });
+    document.getElementById(
+      "resultDescription"
+    ).textContent =
+      "Select a demonstration scenario to simulate the SENTINEL assessment and guidance loop.";
 
 
-    const video =
-      document.createElement("video");
+    document.getElementById(
+      "guidance"
+    ).textContent =
+      "Choose a scenario to continue.";
 
-    video.id="cameraVideo";
-
-    video.className="camera-video";
-
-    video.autoplay=true;
-
-    video.playsInline=true;
-
-    video.muted=true;
-
-    video.srcObject=
-      cameraStream;
-
-
-    scan.innerHTML="";
-
-    scan.appendChild(video);
-
-
-    const overlay =
-      document.createElement("div");
-
-    overlay.className=
-      "scan-label";
-
-    overlay.id="scanLabel";
-
-    overlay.textContent=
-      "LIVE CAMERA · LOCAL OBSERVATION";
-
-    scan.appendChild(overlay);
-
-
-    document
-      .getElementById("systemStatus")
-      .textContent=
-      "CAMERA ACTIVE";
-
-
-    document
-      .getElementById("captureButton")
-      .classList.add("show");
-
-
-  }catch(error){
-
-    console.error(error);
-
-    label.textContent=
-      "CAMERA ACCESS UNAVAILABLE";
-
-  }
+  }, 1800);
 
 }
 
 
-/* -----------------------------------
-   CAPTURE REAL CAMERA FRAME
------------------------------------ */
+/* SELECT SCENARIO */
 
-function captureFrame(){
+function selectScenario(type) {
 
-  const video =
-    document.getElementById("cameraVideo");
-
-  if(!video){
-
-    alert(
-      "Start the camera first."
-    );
-
-    return;
-
-  }
-
-  if(
-    video.readyState <
-    HTMLMediaElement.HAVE_CURRENT_DATA
-  ){
-
-    alert(
-      "Camera is not ready yet."
-    );
-
-    return;
-
-  }
-
-
-  const canvas =
-    document.createElement("canvas");
-
-  canvas.width =
-    video.videoWidth || 1280;
-
-  canvas.height =
-    video.videoHeight || 720;
-
-
-  const ctx =
-    canvas.getContext("2d");
-
-
-  ctx.drawImage(
-    video,
-    0,
-    0,
-    canvas.width,
-    canvas.height
-  );
-
-
-  capturedImage =
-    canvas.toDataURL(
-      "image/jpeg",
-      0.88
-    );
-
-
-  const label =
-    document.getElementById("scanLabel");
-
-  label.textContent=
-    "FRAME CAPTURED · READY FOR ASSESSMENT";
+  selectedScenario = type;
 
 
   document
-    .getElementById("systemStatus")
-    .textContent=
-    "FRAME READY";
+    .querySelectorAll(".scenario")
+    .forEach(function (button) {
+
+      button.classList.remove("active");
+
+    });
+
+
+  document
+    .getElementById(type)
+    .classList.add("active");
+
+
+  const data =
+    scenarioData[type];
 
 
   document
@@ -1001,168 +1034,82 @@ function captureFrame(){
 
 
   document
-    .getElementById("state")
-    .textContent=
-    "FRAME CAPTURED";
+    .getElementById("frameStatus")
+    .classList.add("show");
 
 
   document
-    .getElementById("hazardTitle")
-    .textContent=
-    "Visual input captured";
+    .getElementById("resultState")
+    .textContent =
+      "ASSESSMENT COMPLETE";
 
 
   document
-    .getElementById("hazardText")
-    .textContent=
-    "SENTINEL has captured a real camera frame. The next stage will send this visual input to the local assessment engine.";
+    .getElementById("cameraStatus")
+    .textContent =
+      "LOCAL ASSESSMENT · ACTIVE";
 
 
   document
-    .getElementById("guidanceText")
-    .textContent=
-    "Frame ready for hazard assessment.";
+    .getElementById("resultTitle")
+    .textContent =
+      data.title;
 
 
-  const captureButton =
-    document.getElementById(
-      "captureButton"
-    );
-
-  captureButton.textContent=
-    "✓ FRAME CAPTURED";
+  document
+    .getElementById("resultDescription")
+    .textContent =
+      data.description;
 
 
-  setTimeout(()=>{
-
-    captureButton.textContent=
-      "◉ CAPTURE FRAME";
-
-  },1800);
+  document
+    .getElementById("guidance")
+    .textContent =
+      data.guidance;
 
 }
 
 
-/* -----------------------------------
-   DEMO SCENARIOS
------------------------------------ */
+/* HEAR GUIDANCE */
 
-function simulate(type){
+function hearGuidance() {
 
-  currentScenario=type;
+  if (!selectedScenario) {
+
+    speak(
+      "Please select an emergency scenario first."
+    );
+
+    return;
+
+  }
+
+
+  const message =
+    scenarioData[selectedScenario].guidance;
+
+
+  speak(message);
+
 
   document
-    .querySelectorAll(".mode")
-    .forEach(
-      button =>
-        button.classList.remove("active")
-    );
-
-
-  const selected =
-    document.getElementById(
-      type+"Mode"
-    );
-
-  if(selected){
-    selected.classList.add("active");
-  }
-
-
-  const result =
-    document.getElementById("result");
-
-  const label =
-    document.getElementById("scanLabel");
-
-  const title =
-    document.getElementById(
-      "hazardTitle"
-    );
-
-  const text =
-    document.getElementById(
-      "hazardText"
-    );
-
-  const guidance =
-    document.getElementById(
-      "guidanceText"
-    );
-
-  const state =
-    document.getElementById("state");
-
-
-  result.classList.add("show");
-
-  label.textContent=
-    "LOCAL ASSESSMENT · ACTIVE";
-
-  state.textContent=
-    "ASSESSMENT COMPLETE";
-
-
-  if(type==="electrical"){
-
-    title.textContent=
-      "Potential electrical hazard";
-
-    text.textContent=
-      "The scene may contain exposed or damaged electrical equipment.";
-
-    guidance.textContent=
-      "Move away from the area. Do not touch the equipment. Keep others clear and seek appropriate emergency assistance.";
-
-  }
-
-
-  if(type==="fire"){
-
-    title.textContent=
-      "Potential fire / smoke hazard";
-
-    text.textContent=
-      "Visible environmental cues suggest a possible fire or smoke event.";
-
-    guidance.textContent=
-      "Move away from the affected area. Avoid smoke-filled spaces. Alert others if safe and seek emergency assistance.";
-
-  }
-
-
-  if(type==="road"){
-
-    title.textContent=
-      "Potential road incident";
-
-    text.textContent=
-      "The scene may contain moving traffic and an active roadside incident.";
-
-    guidance.textContent=
-      "Move away from traffic if possible. Stay in a safe visible location and seek appropriate emergency assistance.";
-
-  }
+    .getElementById("resultState")
+    .textContent =
+      "VOICE GUIDANCE ACTIVE";
 
 }
 
 
-/* -----------------------------------
-   TEXT TO SPEECH
------------------------------------ */
+/* TEXT TO SPEECH */
 
-function speakGuidance(){
+function speak(text) {
 
-  const text =
-    document.getElementById(
-      "guidanceText"
-    ).textContent;
-
-
-  if(!("speechSynthesis" in window)){
+  if (
+    !("speechSynthesis" in window)
+  ) {
 
     alert(
-      "Speech synthesis is not supported in this browser."
+      "Speech output is not supported in this browser."
     );
 
     return;
@@ -1173,54 +1120,222 @@ function speakGuidance(){
   window.speechSynthesis.cancel();
 
 
-  const utterance =
+  const voice =
     new SpeechSynthesisUtterance(text);
 
 
-  utterance.lang="en-IN";
+  voice.lang =
+    "en-IN";
 
-  utterance.rate=.92;
+  voice.rate =
+    0.95;
 
-  utterance.pitch=1;
-
-
-  window.speechSynthesis
-    .speak(utterance);
-
-
-  document
-    .getElementById("systemStatus")
-    .textContent=
-    "SPEAKING";
+  voice.pitch =
+    1;
 
 
-  utterance.onend=()=>{
-
-    document
-      .getElementById("systemStatus")
-      .textContent=
-      "LOCAL READY";
-
-  };
+  window.speechSynthesis.speak(
+    voice
+  );
 
 }
 
 
-/* -----------------------------------
-   VOICE INPUT
------------------------------------ */
+/* REASSESS */
 
-function activateVoice(){
+function reassess() {
+
+  const state =
+    document.getElementById(
+      "resultState"
+    );
+
+  const status =
+    document.getElementById(
+      "cameraStatus"
+    );
+
+
+  state.textContent =
+    "REASSESSING...";
+
+
+  status.textContent =
+    "VERIFYING · NEW OBSERVATION";
+
+
+  document
+    .querySelectorAll(".loop span")
+    .forEach(function (item) {
+
+      item.classList.remove("active");
+
+    });
+
+
+  setTimeout(function () {
+
+    state.textContent =
+      "LOOP ACTIVE";
+
+
+    status.textContent =
+      "LOCAL PROCESSING · READY";
+
+
+    document
+      .getElementById(
+        "resultDescription"
+      )
+      .textContent =
+      "SENTINEL completed another observation cycle and is ready to update its assessment.";
+
+
+    document
+      .querySelectorAll(".loop span")[3]
+      .classList.add("active");
+
+  }, 1200);
+
+}
+
+
+/* CAMERA */
+
+async function activateCamera() {
+
+  const camera =
+    document.getElementById(
+      "camera"
+    );
+
+  const status =
+    document.getElementById(
+      "cameraStatus"
+    );
+
+
+  if (
+    !navigator.mediaDevices ||
+    !navigator.mediaDevices.getUserMedia
+  ) {
+
+    status.textContent =
+      "CAMERA NOT AVAILABLE";
+
+    return;
+
+  }
+
+
+  try {
+
+    if (cameraStream) {
+
+      cameraStream
+        .getTracks()
+        .forEach(function (track) {
+
+          track.stop();
+
+        });
+
+    }
+
+
+    cameraStream =
+      await navigator.mediaDevices.getUserMedia({
+
+        video: {
+          facingMode: {
+            ideal: "environment"
+          }
+        },
+
+        audio: false
+
+      });
+
+
+    const video =
+      document.createElement(
+        "video"
+      );
+
+
+    video.autoplay = true;
+
+    video.playsInline = true;
+
+    video.muted = true;
+
+    video.srcObject =
+      cameraStream;
+
+
+    camera.innerHTML = "";
+
+    camera.appendChild(video);
+
+
+    const overlay =
+      document.createElement(
+        "div"
+      );
+
+
+    overlay.className =
+      "camera-overlay";
+
+
+    overlay.innerHTML = `
+
+      <div class="corner tl"></div>
+
+      <div class="corner br"></div>
+
+      <div class="camera-status">
+        LIVE CAMERA · LOCAL OBSERVATION
+      </div>
+
+    `;
+
+
+    camera.appendChild(
+      overlay
+    );
+
+
+    camera.classList.add(
+      "live"
+    );
+
+
+  }
+
+  catch (error) {
+
+    status.textContent =
+      "CAMERA ACCESS DENIED";
+
+  }
+
+}
+
+
+/* VOICE INPUT */
+
+function activateVoice() {
 
   const Recognition =
     window.SpeechRecognition ||
     window.webkitSpeechRecognition;
 
 
-  if(!Recognition){
+  if (!Recognition) {
 
     alert(
-      "Voice recognition is not supported in this browser."
+      "Voice input is not supported in this browser."
     );
 
     return;
@@ -1232,31 +1347,31 @@ function activateVoice(){
     new Recognition();
 
 
-  recognition.lang="en-IN";
-
-  recognition.interimResults=false;
-
-  recognition.maxAlternatives=1;
+  recognition.lang =
+    "en-IN";
 
 
-  recognition.onstart=()=>{
+  recognition.interimResults =
+    false;
 
-    document
-      .getElementById("scanLabel")
-      .textContent=
+
+  recognition.continuous =
+    false;
+
+
+  document
+    .getElementById(
+      "cameraStatus"
+    )
+    .textContent =
       "LISTENING · VOICE INPUT";
 
 
-    document
-      .getElementById("systemStatus")
-      .textContent=
-      "LISTENING";
-
-  };
+  recognition.start();
 
 
-  recognition.onresult=
-    function(event){
+  recognition.onresult =
+    function (event) {
 
       const text =
         event.results[0][0]
@@ -1264,119 +1379,81 @@ function activateVoice(){
 
 
       document
-        .getElementById("scanLabel")
-        .textContent=
-        "VOICE RECEIVED · INPUT READY";
-
-
-      document
-        .getElementById("systemStatus")
-        .textContent=
-        "VOICE READY";
-
-
-      document
-        .getElementById("result")
+        .getElementById(
+          "result"
+        )
         .classList.add("show");
 
 
       document
-        .getElementById("state")
-        .textContent=
-        "VOICE INPUT RECEIVED";
+        .getElementById(
+          "resultState"
+        )
+        .textContent =
+          "VOICE INPUT RECEIVED";
 
 
       document
-        .getElementById("hazardTitle")
-        .textContent=
-        "Situation reported by user";
+        .getElementById(
+          "resultTitle"
+        )
+        .textContent =
+          "Situation reported";
 
 
       document
-        .getElementById("hazardText")
-        .textContent=
-        '"' + text + '"';
+        .getElementById(
+          "resultDescription"
+        )
+        .textContent =
+          '"' + text + '"';
 
 
       document
-        .getElementById("guidanceText")
-        .textContent=
-        "SENTINEL is ready to assess the reported situation.";
+        .getElementById(
+          "guidance"
+        )
+        .textContent =
+          "SENTINEL is ready to assess the reported situation.";
 
     };
 
 
-  recognition.onerror=
-    function(){
+  recognition.onerror =
+    function () {
 
       document
-        .getElementById("scanLabel")
-        .textContent=
-        "VOICE INPUT FAILED";
-
-      document
-        .getElementById("systemStatus")
-        .textContent=
-        "LOCAL READY";
+        .getElementById(
+          "cameraStatus"
+        )
+        .textContent =
+          "VOICE INPUT UNAVAILABLE";
 
     };
 
-
-  recognition.start();
-
 }
 
 
-/* -----------------------------------
-   REASSESS
------------------------------------ */
+/* STOP CAMERA WHEN PAGE CLOSES */
 
-function reassess(){
+window.addEventListener(
+  "beforeunload",
+  function () {
 
-  const state =
-    document.getElementById("state");
+    if (cameraStream) {
 
-  const label =
-    document.getElementById("scanLabel");
+      cameraStream
+        .getTracks()
+        .forEach(function (track) {
 
-  const systemStatus =
-    document.getElementById(
-      "systemStatus"
-    );
+          track.stop();
 
+        });
 
-  state.textContent=
-    "REASSESSING...";
+    }
 
-  label.textContent=
-    "VERIFYING · NEW OBSERVATION";
-
-  systemStatus.textContent=
-    "REASSESSING";
-
-
-  setTimeout(()=>{
-
-    state.textContent=
-      "LOOP ACTIVE";
-
-
-    label.textContent=
-      "LOCAL PROCESSING · READY";
-
-
-    systemStatus.textContent=
-      "LOCAL READY";
-
-
-    document
-      .getElementById("hazardText")
-      .textContent=
-      "SENTINEL has completed another observation cycle and is ready to update its assessment.";
-
-  },1200);
-
-}
+  }
+);
 
 </script>
 
