@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07090d">
-<title>SENTINEL — Emergency Copilot</title>
+<meta name="theme-color" content="#050608">
+<title>SENTINEL — Emergency Intelligence</title>
 
 <style>
 *{
@@ -14,231 +14,231 @@
 }
 
 :root{
-  --bg:#07090d;
-  --panel:#0d1118;
-  --panel2:#121923;
-  --line:#26303d;
+  --bg:#050608;
+  --surface:#0b0e12;
+  --surface2:#11151b;
+  --surface3:#171c23;
+  --border:rgba(255,255,255,.09);
+  --border2:rgba(255,255,255,.15);
   --text:#f5f7fa;
-  --muted:#8993a1;
-  --accent:#d7ff3f;
-  --danger:#ff5c5c;
-  --orange:#ffad4d;
-  --green:#6dff9b;
+  --muted:#8d96a3;
+  --lime:#d7ff3f;
+  --lime2:#baf51b;
+  --red:#ff5f61;
+  --amber:#ffb454;
+  --green:#71f6a0;
+}
+
+html{
+  background:var(--bg);
 }
 
 body{
   min-height:100vh;
-  background:
-    radial-gradient(circle at 50% -10%,rgba(215,255,63,.09),transparent 35%),
-    var(--bg);
   color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Arial,sans-serif;
+  background:
+    radial-gradient(
+      700px 500px at 50% -10%,
+      rgba(215,255,63,.075),
+      transparent 65%
+    ),
+    #050608;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    Inter,
+    Arial,
+    sans-serif;
 }
 
 button{
   font:inherit;
 }
 
+button:focus-visible{
+  outline:2px solid var(--lime);
+  outline-offset:2px;
+}
+
 .app{
-  width:min(100%,520px);
+  width:min(100%,620px);
   margin:auto;
-  min-height:100vh;
-  padding:18px 16px 42px;
+  padding:18px 16px 48px;
 }
 
-/* HEADER */
+/* =========================
+   TOP BAR
+========================= */
 
-.header{
+.topbar{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  padding:4px 2px 18px;
+  align-items:center;
+  padding:4px 2px 24px;
 }
 
-.brand{
+.logo{
   display:flex;
   align-items:center;
   gap:10px;
 }
 
-.brand-mark{
-  width:34px;
-  height:34px;
+.logo-symbol{
+  width:35px;
+  height:35px;
+  border-radius:11px;
   border:1px solid rgba(215,255,63,.45);
-  border-radius:10px;
   display:grid;
   place-items:center;
-  color:var(--accent);
-  font-size:17px;
-  font-weight:800;
-  box-shadow:0 0 20px rgba(215,255,63,.08);
+  color:var(--lime);
+  font-weight:900;
+  box-shadow:
+    0 0 25px rgba(215,255,63,.08),
+    inset 0 0 15px rgba(215,255,63,.03);
 }
 
-.brand-name{
-  font-size:18px;
-  font-weight:800;
-  letter-spacing:2px;
+.logo-text{
+  font-size:16px;
+  font-weight:850;
+  letter-spacing:2.5px;
 }
 
-.status{
+.system-status{
   display:flex;
   align-items:center;
   gap:7px;
+  padding:7px 10px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  background:rgba(255,255,255,.025);
   color:var(--muted);
-  font-size:11px;
-  letter-spacing:.8px;
-  text-transform:uppercase;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:1px;
 }
 
 .status-dot{
-  width:7px;
-  height:7px;
+  width:6px;
+  height:6px;
   border-radius:50%;
   background:var(--green);
   box-shadow:0 0 9px var(--green);
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
-  padding:20px 2px 24px;
+  padding:4px 2px 25px;
 }
 
-.eyebrow{
-  color:var(--accent);
-  font-size:10px;
-  font-weight:800;
+.hero-label{
+  color:var(--lime);
+  font-size:9px;
+  font-weight:850;
   letter-spacing:2px;
   text-transform:uppercase;
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
 .hero h1{
-  font-size:clamp(38px,10vw,58px);
-  line-height:.94;
-  letter-spacing:-2.5px;
-  max-width:430px;
+  max-width:500px;
+  font-size:clamp(42px,11vw,70px);
+  line-height:.9;
+  letter-spacing:-4px;
+  font-weight:850;
+}
+
+.hero h1 span{
+  color:var(--lime);
 }
 
 .hero p{
+  max-width:470px;
+  margin-top:16px;
   color:var(--muted);
-  margin-top:15px;
-  line-height:1.55;
-  font-size:14px;
-  max-width:430px;
+  font-size:13px;
+  line-height:1.6;
 }
 
-/* CAMERA */
+/* =========================
+   SCANNER
+========================= */
 
-.camera-card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:22px;
+.scanner{
+  position:relative;
+  border:1px solid var(--border2);
+  border-radius:25px;
   overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  background:#080a0d;
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.4),
+    inset 0 0 50px rgba(255,255,255,.015);
 }
 
-.camera-header{
+.scanner-top{
+  position:absolute;
+  z-index:10;
+  top:0;
+  left:0;
+  right:0;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:14px 16px;
-  border-bottom:1px solid var(--line);
-}
-
-.camera-title{
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
-}
-
-.camera-state{
-  color:var(--muted);
-  font-size:10px;
-  letter-spacing:.8px;
-  text-transform:uppercase;
-}
-
-.camera-view{
-  position:relative;
-  aspect-ratio:16/10;
+  padding:15px;
   background:
-    radial-gradient(circle at 50% 45%,#1c2731 0,#0d141b 45%,#07090d 100%);
+    linear-gradient(
+      to bottom,
+      rgba(0,0,0,.7),
+      transparent
+    );
+}
+
+.scanner-title{
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.scanner-state{
+  padding:6px 9px;
+  border-radius:999px;
+  background:rgba(0,0,0,.55);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(12px);
+  color:var(--muted);
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:1px;
+}
+
+.camera{
+  position:relative;
+  aspect-ratio:4/3;
+  min-height:280px;
+  background:
+    radial-gradient(
+      circle at center,
+      #202832 0%,
+      #10151b 40%,
+      #050608 100%
+    );
   overflow:hidden;
 }
 
-#cameraVideo{
+#video{
   display:none;
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.camera-view.live #cameraVideo{
+.camera.live #video{
   display:block;
-}
-
-.camera-overlay{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-}
-
-.corner{
-  position:absolute;
-  width:30px;
-  height:30px;
-  border-color:rgba(215,255,63,.85);
-}
-
-.corner.tl{
-  top:18px;
-  left:18px;
-  border-top:2px solid;
-  border-left:2px solid;
-}
-
-.corner.tr{
-  top:18px;
-  right:18px;
-  border-top:2px solid;
-  border-right:2px solid;
-}
-
-.corner.bl{
-  bottom:18px;
-  left:18px;
-  border-bottom:2px solid;
-  border-left:2px solid;
-}
-
-.corner.br{
-  bottom:18px;
-  right:18px;
-  border-bottom:2px solid;
-  border-right:2px solid;
-}
-
-.scan-line{
-  display:none;
-  position:absolute;
-  left:8%;
-  right:8%;
-  height:1px;
-  background:var(--accent);
-  box-shadow:0 0 15px var(--accent);
-  animation:scan 1.7s linear infinite;
-}
-
-.analyzing .scan-line{
-  display:block;
-}
-
-@keyframes scan{
-  0%{top:12%}
-  50%{top:88%}
-  100%{top:12%}
 }
 
 .camera-placeholder{
@@ -248,81 +248,206 @@ button{
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  gap:10px;
-  color:var(--muted);
+  gap:13px;
 }
 
-.live .camera-placeholder{
+.camera.live .camera-placeholder{
   display:none;
 }
 
-.camera-icon{
-  font-size:34px;
-  opacity:.7;
+.camera-glyph{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.12);
+  display:grid;
+  place-items:center;
+  font-size:25px;
+  color:var(--lime);
+  background:rgba(255,255,255,.025);
 }
 
-.camera-placeholder span{
-  font-size:11px;
-  letter-spacing:1px;
-  text-transform:uppercase;
+.camera-placeholder strong{
+  font-size:12px;
+  letter-spacing:.8px;
 }
 
-.capture-preview{
+.camera-placeholder small{
+  color:var(--muted);
+  font-size:10px;
+}
+
+/* scanner corners */
+
+.scan-corner{
+  position:absolute;
+  z-index:5;
+  width:42px;
+  height:42px;
+  border-color:rgba(215,255,63,.9);
+  pointer-events:none;
+}
+
+.scan-corner.one{
+  top:62px;
+  left:22px;
+  border-top:2px solid;
+  border-left:2px solid;
+}
+
+.scan-corner.two{
+  top:62px;
+  right:22px;
+  border-top:2px solid;
+  border-right:2px solid;
+}
+
+.scan-corner.three{
+  bottom:22px;
+  left:22px;
+  border-bottom:2px solid;
+  border-left:2px solid;
+}
+
+.scan-corner.four{
+  bottom:22px;
+  right:22px;
+  border-bottom:2px solid;
+  border-right:2px solid;
+}
+
+.scan-beam{
+  display:none;
+  position:absolute;
+  z-index:4;
+  left:8%;
+  right:8%;
+  height:2px;
+  background:var(--lime);
+  box-shadow:
+    0 0 10px var(--lime),
+    0 0 35px rgba(215,255,63,.7);
+  animation:scanBeam 1.6s linear infinite;
+}
+
+.scanning .scan-beam{
+  display:block;
+}
+
+@keyframes scanBeam{
+  0%{top:20%}
+  50%{top:80%}
+  100%{top:20%}
+}
+
+/* captured image */
+
+.capture-layer{
   display:none;
   position:absolute;
   inset:0;
-  background:#05070a;
+  z-index:3;
+  background:#050608;
 }
 
-.capture-preview img{
+.capture-layer.show{
+  display:block;
+}
+
+.capture-layer img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.capture-preview.show{
-  display:block;
-}
-
-.capture-label{
+.capture-info{
   position:absolute;
-  left:14px;
-  bottom:12px;
-  padding:7px 9px;
-  border:1px solid rgba(215,255,63,.4);
-  background:rgba(7,9,13,.78);
-  backdrop-filter:blur(10px);
-  border-radius:7px;
-  color:var(--accent);
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1px;
+  left:15px;
+  bottom:15px;
+  padding:8px 10px;
+  border-radius:8px;
+  background:rgba(0,0,0,.7);
+  border:1px solid rgba(215,255,63,.35);
+  color:var(--lime);
+  backdrop-filter:blur(12px);
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:1.1px;
 }
 
-/* BUTTONS */
+/* analysis overlay */
 
-.controls{
+.analysis-overlay{
+  display:none;
+  position:absolute;
+  z-index:20;
+  inset:0;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:13px;
+  background:rgba(4,6,8,.52);
+  backdrop-filter:blur(3px);
+}
+
+.scanning .analysis-overlay{
+  display:flex;
+}
+
+.analysis-ring{
+  width:66px;
+  height:66px;
+  border-radius:50%;
+  border:2px solid rgba(215,255,63,.2);
+  border-top-color:var(--lime);
+  animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.analysis-text{
+  color:var(--lime);
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:1.5px;
+}
+
+/* =========================
+   MAIN ACTIONS
+========================= */
+
+.action-panel{
+  padding:13px;
+  border-top:1px solid var(--border);
+  background:rgba(8,10,13,.9);
+}
+
+.primary-actions{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  padding:12px;
+  grid-template-columns:1.3fr 1fr;
+  gap:9px;
 }
 
 .btn{
-  min-height:48px;
-  border:1px solid var(--line);
-  background:var(--panel2);
+  min-height:50px;
+  border:1px solid var(--border2);
+  border-radius:13px;
+  background:var(--surface2);
   color:var(--text);
-  border-radius:12px;
   cursor:pointer;
-  font-size:11px;
-  font-weight:800;
+  font-size:10px;
+  font-weight:850;
   letter-spacing:1px;
-  transition:.18s ease;
+  transition:
+    transform .15s ease,
+    border-color .15s ease,
+    background .15s ease;
 }
 
 .btn:hover{
-  border-color:#465363;
+  border-color:rgba(255,255,255,.25);
   transform:translateY(-1px);
 }
 
@@ -331,75 +456,85 @@ button{
 }
 
 .btn.primary{
-  background:var(--accent);
-  color:#0a0d09;
-  border-color:var(--accent);
+  color:#090b06;
+  background:var(--lime);
+  border-color:var(--lime);
 }
 
 .btn.primary:hover{
-  box-shadow:0 0 25px rgba(215,255,63,.15);
+  background:var(--lime2);
 }
 
-.btn.capture{
+.btn.accent{
+  color:var(--lime);
+  border-color:rgba(215,255,63,.35);
+  background:rgba(215,255,63,.045);
+}
+
+.btn.danger{
+  color:#ff8888;
+  border-color:rgba(255,95,97,.2);
+}
+
+/* =========================
+   STATUS STRIP
+========================= */
+
+.live-status{
   display:none;
-  border-color:rgba(215,255,63,.45);
-  color:var(--accent);
-}
-
-.btn.capture.visible{
-  display:block;
-}
-
-/* VOICE */
-
-.voice-row{
-  display:flex;
-  gap:10px;
   margin-top:10px;
+  align-items:center;
+  gap:9px;
+  padding:10px 12px;
+  border-radius:11px;
+  background:rgba(215,255,63,.045);
+  border:1px solid rgba(215,255,63,.12);
 }
 
-.voice-btn{
-  flex:1;
-  min-height:46px;
-  border:1px solid var(--line);
-  background:transparent;
-  color:var(--muted);
-  border-radius:12px;
-  cursor:pointer;
-  font-size:10px;
-  font-weight:800;
+.live-status.show{
+  display:flex;
+}
+
+.live-pulse{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--lime);
+  box-shadow:0 0 10px var(--lime);
+}
+
+.live-status-text{
+  color:var(--lime);
+  font-size:8px;
+  font-weight:850;
   letter-spacing:1px;
 }
 
-.voice-btn.listening{
-  color:var(--accent);
-  border-color:var(--accent);
-  box-shadow:0 0 20px rgba(215,255,63,.08);
-}
-
-/* SCENARIOS */
+/* =========================
+   SCENARIOS
+========================= */
 
 .section{
-  margin-top:28px;
+  margin-top:27px;
 }
 
-.section-head{
+.section-header{
   display:flex;
   justify-content:space-between;
-  align-items:end;
+  align-items:center;
   margin-bottom:11px;
 }
 
-.section-title{
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:1.5px;
+.section-heading{
+  font-size:10px;
+  font-weight:850;
+  letter-spacing:1.4px;
   text-transform:uppercase;
 }
 
-.section-note{
+.section-caption{
   color:var(--muted);
-  font-size:10px;
+  font-size:9px;
 }
 
 .scenarios{
@@ -409,185 +544,257 @@ button{
 }
 
 .scenario{
-  min-height:92px;
-  padding:14px 10px;
-  text-align:left;
-  border:1px solid var(--line);
-  background:var(--panel);
+  position:relative;
+  min-height:112px;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.035),
+      rgba(255,255,255,.012)
+    );
   color:var(--text);
-  border-radius:15px;
+  text-align:left;
   cursor:pointer;
+  overflow:hidden;
   transition:.18s ease;
 }
 
 .scenario:hover{
-  border-color:#4a5665;
   transform:translateY(-2px);
+  border-color:var(--border2);
 }
 
-.scenario.active{
-  border-color:var(--accent);
-  box-shadow:inset 0 0 0 1px rgba(215,255,63,.16);
+.scenario.selected{
+  border-color:rgba(215,255,63,.65);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(215,255,63,.09),
+      rgba(255,255,255,.015)
+    );
+  box-shadow:
+    0 10px 35px rgba(215,255,63,.05),
+    inset 0 0 0 1px rgba(215,255,63,.08);
+}
+
+.scenario-number{
+  position:absolute;
+  top:11px;
+  right:11px;
+  color:#4f5864;
+  font-size:8px;
+  font-weight:800;
 }
 
 .scenario-icon{
-  font-size:21px;
-  margin-bottom:12px;
+  font-size:22px;
+  margin-bottom:18px;
 }
 
 .scenario-name{
-  font-size:11px;
-  font-weight:800;
-}
-
-.scenario-sub{
-  color:var(--muted);
-  font-size:9px;
-  margin-top:4px;
-}
-
-/* STATUS */
-
-.observation{
-  margin-top:18px;
-  display:none;
-  align-items:center;
-  gap:10px;
-  padding:12px 14px;
-  border-radius:12px;
-  background:rgba(215,255,63,.05);
-  border:1px solid rgba(215,255,63,.16);
-  color:var(--accent);
   font-size:10px;
-  font-weight:800;
-  letter-spacing:.8px;
+  font-weight:850;
 }
 
-.observation.show{
-  display:flex;
+.scenario-desc{
+  margin-top:5px;
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.35;
 }
 
-.pulse{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--accent);
-  animation:pulse 1s infinite;
-}
+/* =========================
+   ASSESSMENT
+========================= */
 
-@keyframes pulse{
-  0%,100%{opacity:.35;transform:scale(.8)}
-  50%{opacity:1;transform:scale(1)}
-}
-
-/* RESULT */
-
-.result{
+.assessment{
   display:none;
   margin-top:18px;
-  background:var(--panel);
-  border:1px solid var(--line);
   border-radius:20px;
   overflow:hidden;
+  border:1px solid var(--border2);
+  background:
+    linear-gradient(
+      145deg,
+      #10151b,
+      #090c10
+    );
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
 }
 
-.result.show{
+.assessment.show{
   display:block;
 }
 
-.result-top{
+.assessment-header{
   padding:18px;
-  border-bottom:1px solid var(--line);
+  border-bottom:1px solid var(--border);
 }
 
-.result-kicker{
+.assessment-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.assessment-label{
+  color:var(--lime);
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:1.4px;
+  text-transform:uppercase;
+}
+
+.demo-label{
   color:var(--muted);
-  font-size:9px;
-  font-weight:800;
+  font-size:7px;
+  letter-spacing:1px;
+}
+
+.assessment-title{
+  font-size:25px;
+  line-height:1.05;
+  letter-spacing:-1px;
+  font-weight:850;
+}
+
+.risk-badge{
+  display:inline-block;
+  margin-top:12px;
+  padding:6px 8px;
+  border-radius:7px;
+  color:#ff9b9b;
+  border:1px solid rgba(255,95,97,.25);
+  background:rgba(255,95,97,.07);
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:1px;
+}
+
+.action-section{
+  padding:18px;
+}
+
+.action-label{
+  color:var(--muted);
+  font-size:8px;
+  font-weight:850;
   letter-spacing:1.4px;
   text-transform:uppercase;
   margin-bottom:9px;
 }
 
-.result-title{
-  font-size:25px;
-  font-weight:800;
-  letter-spacing:-.7px;
-}
-
-.risk{
-  display:inline-flex;
-  margin-top:11px;
-  padding:6px 9px;
-  border-radius:7px;
-  background:rgba(255,92,92,.1);
-  border:1px solid rgba(255,92,92,.25);
-  color:#ff8b8b;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1px;
-}
-
-.guidance{
-  padding:18px;
-}
-
-.guidance-label{
-  color:var(--accent);
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
-  margin-bottom:10px;
-}
-
-.guidance-text{
+.action-text{
   font-size:17px;
-  line-height:1.48;
-  font-weight:600;
+  line-height:1.5;
+  font-weight:650;
 }
 
-.result-actions{
+.assessment-actions{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:10px;
+  gap:9px;
   padding:0 18px 18px;
 }
 
-/* REASSESS */
+/* =========================
+   VOICE
+========================= */
 
-.reassess{
+.voice-tools{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
   margin-top:10px;
-  width:100%;
 }
 
-/* FOOTER */
+.voice-btn{
+  min-height:44px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+  font-size:8px;
+  font-weight:850;
+  letter-spacing:1px;
+}
+
+.voice-btn:hover{
+  color:var(--text);
+  border-color:var(--border2);
+}
+
+.voice-btn.listening{
+  color:var(--lime);
+  border-color:rgba(215,255,63,.55);
+  background:rgba(215,255,63,.045);
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
-  margin-top:30px;
+  margin-top:32px;
   padding:18px 4px 0;
-  border-top:1px solid var(--line);
-  color:var(--muted);
-  font-size:9px;
-  line-height:1.6;
+  border-top:1px solid var(--border);
   text-align:center;
+  color:#68717d;
+  font-size:8px;
+  line-height:1.6;
 }
 
 .footer strong{
-  color:#b7c0cb;
+  color:#9da6b2;
+  letter-spacing:1px;
 }
 
-.hidden-canvas{
-  display:none;
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:420px){
+
+  .app{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  .hero h1{
+    letter-spacing:-3px;
+  }
+
+  .camera{
+    min-height:245px;
+  }
+
+  .scenarios{
+    gap:7px;
+  }
+
+  .scenario{
+    padding:11px;
+    min-height:105px;
+  }
+
+  .scenario-icon{
+    margin-bottom:14px;
+  }
 }
 
-@media(max-width:360px){
+@media(max-width:350px){
+
   .scenarios{
     grid-template-columns:1fr;
   }
 
-  .hero h1{
-    font-size:40px;
+  .primary-actions{
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -597,170 +804,358 @@ button{
 
 <div class="app">
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="brand">
-      <div class="brand-mark">S</div>
-      <div class="brand-name">SENTINEL</div>
+  <!-- TOP BAR -->
+  <header class="topbar">
+
+    <div class="logo">
+      <div class="logo-symbol">S</div>
+      <div class="logo-text">SENTINEL</div>
     </div>
 
-    <div class="status">
+    <div class="system-status">
       <span class="status-dot"></span>
-      LOCAL READY
+      SYSTEM READY
     </div>
+
   </header>
+
 
   <!-- HERO -->
   <section class="hero">
-    <div class="eyebrow">Emergency Intelligence Prototype</div>
-    <h1>Know what's happening.</h1>
-    <p>
-      Observe the situation. Assess immediate hazards.
-      Get a clear next action. Reassess as the situation changes.
-    </p>
-  </section>
 
-  <!-- CAMERA -->
-  <section class="camera-card">
-
-    <div class="camera-header">
-      <div class="camera-title">Situation Observation</div>
-      <div class="camera-state" id="cameraState">Camera inactive</div>
+    <div class="hero-label">
+      AI Emergency & Situational Intelligence
     </div>
 
-    <div class="camera-view" id="cameraView">
+    <h1>
+      See the risk.<br>
+      <span>Know the next move.</span>
+    </h1>
 
-      <video id="cameraVideo" autoplay playsinline muted></video>
+    <p>
+      SENTINEL observes a situation, assesses immediate hazards,
+      guides the user toward an appropriate next action,
+      and reassesses as conditions change.
+    </p>
+
+  </section>
+
+
+  <!-- CAMERA / SCANNER -->
+  <section class="scanner">
+
+    <div class="scanner-top">
+
+      <div class="scanner-title">
+        LIVE SITUATION VIEW
+      </div>
+
+      <div class="scanner-state" id="scannerState">
+        READY
+      </div>
+
+    </div>
+
+
+    <div class="camera" id="camera">
+
+      <video
+        id="video"
+        autoplay
+        playsinline
+        muted>
+      </video>
+
 
       <div class="camera-placeholder">
-        <div class="camera-icon">⌾</div>
-        <span>Camera observation ready</span>
+
+        <div class="camera-glyph">
+          ⌾
+        </div>
+
+        <strong>Observation surface ready</strong>
+
+        <small>
+          Activate the camera to begin
+        </small>
+
       </div>
 
-      <div class="capture-preview" id="capturePreview">
-        <img id="capturedImage" alt="Captured observation">
-        <div class="capture-label">FRAME CAPTURED</div>
+
+      <!-- SCAN CORNERS -->
+
+      <div class="scan-corner one"></div>
+      <div class="scan-corner two"></div>
+      <div class="scan-corner three"></div>
+      <div class="scan-corner four"></div>
+
+      <div class="scan-beam"></div>
+
+
+      <!-- CAPTURED IMAGE -->
+
+      <div class="capture-layer" id="captureLayer">
+
+        <img
+          id="capturedImage"
+          alt="Captured situation">
+
+        <div class="capture-info">
+          OBSERVATION CAPTURED
+        </div>
+
       </div>
 
-      <div class="camera-overlay">
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-        <div class="scan-line"></div>
+
+      <!-- ANALYSIS -->
+
+      <div class="analysis-overlay">
+
+        <div class="analysis-ring"></div>
+
+        <div class="analysis-text" id="analysisText">
+          ANALYZING SITUATION
+        </div>
+
       </div>
 
     </div>
 
-    <div class="controls">
 
-      <button class="btn primary" id="cameraButton" onclick="activateCamera()">
-        CAMERA
-      </button>
+    <!-- ACTION PANEL -->
 
-      <button class="btn capture" id="captureButton" onclick="captureFrame()">
-        CAPTURE FRAME
-      </button>
+    <div class="action-panel">
 
-      <button class="btn" onclick="startObservation()">
-        START OBSERVATION
-      </button>
+      <div class="primary-actions">
 
-      <button class="btn" onclick="stopCamera()">
-        STOP CAMERA
-      </button>
+        <button
+          class="btn primary"
+          id="cameraButton"
+          onclick="openCamera()">
+          OPEN CAMERA
+        </button>
+
+        <button
+          class="btn accent"
+          id="captureButton"
+          onclick="captureAndPrepare()">
+          CAPTURE
+        </button>
+
+      </div>
+
+
+      <div class="live-status" id="liveStatus">
+
+        <span class="live-pulse"></span>
+
+        <span
+          class="live-status-text"
+          id="liveStatusText">
+          CAMERA ACTIVE
+        </span>
+
+      </div>
 
     </div>
+
   </section>
 
-  <!-- VOICE -->
-  <div class="voice-row">
 
-    <button class="voice-btn" id="voiceButton" onclick="activateVoice()">
+  <!-- VOICE TOOLS -->
+
+  <div class="voice-tools">
+
+    <button
+      class="voice-btn"
+      id="voiceButton"
+      onclick="startVoice()">
       🎙 VOICE INPUT
     </button>
 
-    <button class="voice-btn" onclick="hearGuidance()">
+    <button
+      class="voice-btn"
+      onclick="speakGuidance()">
       🔊 HEAR GUIDANCE
     </button>
 
   </div>
 
+
   <!-- SCENARIOS -->
+
   <section class="section">
 
-    <div class="section-head">
-      <div class="section-title">Demo Scenarios</div>
-      <div class="section-note">Choose a situation</div>
+    <div class="section-header">
+
+      <div class="section-heading">
+        Situation
+      </div>
+
+      <div class="section-caption">
+        Select a demo condition
+      </div>
+
     </div>
+
 
     <div class="scenarios">
 
-      <button class="scenario" id="electricalBtn"
-              onclick="selectScenario('electrical')">
-        <div class="scenario-icon">⚡</div>
-        <div class="scenario-name">Electrical</div>
-        <div class="scenario-sub">Possible live hazard</div>
+      <button
+        class="scenario"
+        id="electrical"
+        onclick="chooseScenario('electrical')">
+
+        <div class="scenario-number">
+          01
+        </div>
+
+        <div class="scenario-icon">
+          ⚡
+        </div>
+
+        <div class="scenario-name">
+          Electrical
+        </div>
+
+        <div class="scenario-desc">
+          Exposed wiring or electrical hazard
+        </div>
+
       </button>
 
-      <button class="scenario" id="fireBtn"
-              onclick="selectScenario('fire')">
-        <div class="scenario-icon">🔥</div>
-        <div class="scenario-name">Fire / Smoke</div>
-        <div class="scenario-sub">Smoke or fire event</div>
+
+      <button
+        class="scenario"
+        id="fire"
+        onclick="chooseScenario('fire')">
+
+        <div class="scenario-number">
+          02
+        </div>
+
+        <div class="scenario-icon">
+          🔥
+        </div>
+
+        <div class="scenario-name">
+          Fire / Smoke
+        </div>
+
+        <div class="scenario-desc">
+          Smoke, fire or affected area
+        </div>
+
       </button>
 
-      <button class="scenario" id="roadBtn"
-              onclick="selectScenario('road')">
-        <div class="scenario-icon">🚗</div>
-        <div class="scenario-name">Road Incident</div>
-        <div class="scenario-sub">Traffic / accident</div>
+
+      <button
+        class="scenario"
+        id="road"
+        onclick="chooseScenario('road')">
+
+        <div class="scenario-number">
+          03
+        </div>
+
+        <div class="scenario-icon">
+          🚗
+        </div>
+
+        <div class="scenario-name">
+          Road Incident
+        </div>
+
+        <div class="scenario-desc">
+          Traffic, collision or roadside event
+        </div>
+
       </button>
 
     </div>
 
   </section>
 
-  <!-- OBSERVATION STATUS -->
-  <div class="observation" id="observationStatus">
-    <span class="pulse"></span>
-    <span id="observationText">OBSERVING SITUATION...</span>
-  </div>
 
-  <!-- RESULT -->
-  <section class="result" id="resultCard">
+  <!-- ANALYZE BUTTON -->
 
-    <div class="result-top">
+  <section class="section">
 
-      <div class="result-kicker">Situation assessment</div>
+    <button
+      class="btn primary"
+      style="width:100%;"
+      onclick="analyzeSituation()">
 
-      <div class="result-title" id="resultTitle">
-        Hazard detected
+      ◉ ANALYZE SITUATION
+
+    </button>
+
+  </section>
+
+
+  <!-- ASSESSMENT -->
+
+  <section
+    class="assessment"
+    id="assessment">
+
+    <div class="assessment-header">
+
+      <div class="assessment-meta">
+
+        <div class="assessment-label">
+          SENTINEL ASSESSMENT
+        </div>
+
+        <div class="demo-label">
+          PROTOTYPE SCENARIO
+        </div>
+
       </div>
 
-      <div class="risk" id="riskLevel">
-        IMMEDIATE CAUTION
+
+      <div
+        class="assessment-title"
+        id="assessmentTitle">
+        Situation detected
+      </div>
+
+
+      <div
+        class="risk-badge"
+        id="riskBadge">
+        CAUTION
       </div>
 
     </div>
 
-    <div class="guidance">
 
-      <div class="guidance-label">Recommended next action</div>
+    <div class="action-section">
 
-      <div class="guidance-text" id="guidanceText">
-        Move away from the affected area and seek appropriate emergency assistance.
+      <div class="action-label">
+        Recommended next action
+      </div>
+
+      <div
+        class="action-text"
+        id="actionText">
+        Move to a safer position and seek appropriate assistance.
       </div>
 
     </div>
 
-    <div class="result-actions">
 
-      <button class="btn primary" onclick="hearGuidance()">
-        🔊 HEAR GUIDANCE
+    <div class="assessment-actions">
+
+      <button
+        class="btn primary"
+        onclick="speakGuidance()">
+        🔊 HEAR
       </button>
 
-      <button class="btn" onclick="reassess()">
+      <button
+        class="btn"
+        onclick="reassess()">
         ↻ REASSESS
       </button>
 
@@ -768,53 +1163,68 @@ button{
 
   </section>
 
-  <button class="btn reassess" id="bottomReassess"
-          style="display:none"
-          onclick="reassess()">
-    REASSESS SITUATION
-  </button>
 
-  <div class="footer">
-    <strong>SENTINEL PROTOTYPE</strong><br>
-    Designed for immediate safety guidance — not medical diagnosis.
-    Current browser build demonstrates the interaction and observation flow.
-  </div>
+  <!-- FOOTER -->
+
+  <footer class="footer">
+
+    <strong>SENTINEL · PHONE-FIRST PROTOTYPE</strong>
+
+    <br>
+
+    Designed for immediate safety guidance —
+    not medical diagnosis.
+
+    <br>
+
+    Current browser build demonstrates the
+    observation and interaction pipeline.
+
+  </footer>
 
 </div>
 
-<canvas id="captureCanvas" class="hidden-canvas"></canvas>
+
+<canvas id="canvas" style="display:none;"></canvas>
+
 
 <script>
+
 /* =========================================================
-   SENTINEL — EMERGENCY COPILOT PROTOTYPE
-   ========================================================= */
+   SENTINEL STATE
+========================================================= */
 
-let cameraStream = null;
-let capturedFrame = null;
-let currentScenario = null;
+let stream = null;
+let capturedImage = null;
+let selectedScenario = null;
 let recognition = null;
-let isListening = false;
+let listening = false;
 
-const scenarios = {
 
-  electrical:{
-    title:"Possible Electrical Hazard",
-    risk:"HIGH CAUTION",
-    guidance:
+/* =========================================================
+   SCENARIO DATA
+========================================================= */
+
+const DATA = {
+
+  electrical: {
+    title: "Possible Electrical Hazard",
+    risk: "HIGH CAUTION",
+    action:
       "Move away. Do not touch the equipment or exposed components. Keep others clear and seek appropriate emergency assistance."
   },
 
-  fire:{
-    title:"Fire / Smoke Situation",
-    risk:"HIGH CAUTION",
-    guidance:
+  fire: {
+    title: "Fire / Smoke Situation",
+    risk: "HIGH CAUTION",
+    action:
       "Move away from the affected area. Avoid entering smoke-filled spaces. Alert others if safe and contact appropriate emergency assistance."
   },
 
-  road:{
-    title:"Road Incident",
-    risk:"IMMEDIATE CAUTION",
-    guidance:
+  road: {
+    title: "Road Incident",
+    risk: "IMMEDIATE CAUTION",
+    action:
       "Move away from traffic if possible and stay in a safe visible location. Contact appropriate emergency assistance."
   }
 
@@ -822,106 +1232,199 @@ const scenarios = {
 
 
 /* =========================================================
-   CAMERA
-   ========================================================= */
+   DOM
+========================================================= */
 
-async function activateCamera(){
+const camera =
+  document.getElementById("camera");
 
-  const video = document.getElementById("cameraVideo");
-  const view = document.getElementById("cameraView");
-  const state = document.getElementById("cameraState");
-  const captureButton = document.getElementById("captureButton");
+const video =
+  document.getElementById("video");
 
-  if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+const scannerState =
+  document.getElementById("scannerState");
 
-    state.textContent = "Camera unavailable";
-    alert("This browser does not support camera access.");
+const cameraButton =
+  document.getElementById("cameraButton");
+
+const captureButton =
+  document.getElementById("captureButton");
+
+const captureLayer =
+  document.getElementById("captureLayer");
+
+const capturedImageElement =
+  document.getElementById("capturedImage");
+
+const liveStatus =
+  document.getElementById("liveStatus");
+
+const liveStatusText =
+  document.getElementById("liveStatusText");
+
+const assessment =
+  document.getElementById("assessment");
+
+
+/* =========================================================
+   OPEN CAMERA
+========================================================= */
+
+async function openCamera(){
+
+  if(!navigator.mediaDevices ||
+     !navigator.mediaDevices.getUserMedia){
+
+    alert(
+      "Camera access is not supported here. " +
+      "Please open the GitHub Pages site using HTTPS Chrome."
+    );
+
     return;
   }
 
+
   try{
 
-    if(cameraStream){
-      stopCamera();
+    /* Stop previous stream */
+
+    if(stream){
+
+      stream.getTracks().forEach(
+        track => track.stop()
+      );
+
+      stream = null;
     }
 
-    cameraStream = await navigator.mediaDevices.getUserMedia({
-      video:{
-        facingMode:{
-          ideal:"environment"
-        }
-      },
-      audio:false
+
+    /* Ask for rear camera */
+
+    stream =
+      await navigator.mediaDevices.getUserMedia({
+
+        video:{
+          facingMode:{
+            ideal:"environment"
+          },
+          width:{
+            ideal:1280
+          },
+          height:{
+            ideal:720
+          }
+        },
+
+        audio:false
+
+      });
+
+
+    video.srcObject = stream;
+
+
+    /* Wait until video actually has data */
+
+    await new Promise(resolve => {
+
+      if(video.readyState >= 2){
+
+        resolve();
+
+      }else{
+
+        video.onloadedmetadata = () => {
+
+          video.play()
+            .then(resolve)
+            .catch(resolve);
+
+        };
+
+      }
+
     });
 
-    video.srcObject = cameraStream;
 
-    await video.play();
+    camera.classList.add("live");
 
-    view.classList.add("live");
-    state.textContent = "Camera active";
-    captureButton.classList.add("visible");
+    captureLayer.classList.remove("show");
+
+    scannerState.textContent =
+      "CAMERA LIVE";
+
+    cameraButton.textContent =
+      "CAMERA ACTIVE";
+
+    captureButton.textContent =
+      "CAPTURE";
+
+    liveStatus.classList.add("show");
+
+    liveStatusText.textContent =
+      "LIVE CAMERA · READY TO CAPTURE";
+
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "SENTINEL camera error:",
+      error
+    );
 
-    state.textContent = "Permission required";
+    scannerState.textContent =
+      "CAMERA ERROR";
 
     alert(
-      "Camera access was not available.\n\n" +
-      "Please allow camera permission in Chrome and try again."
+      "SENTINEL could not access the camera.\n\n" +
+      "Check Chrome → Site Settings → Camera → Allow."
     );
-  }
-}
 
-
-function stopCamera(){
-
-  const video = document.getElementById("cameraVideo");
-  const view = document.getElementById("cameraView");
-  const state = document.getElementById("cameraState");
-  const captureButton = document.getElementById("captureButton");
-
-  if(cameraStream){
-
-    cameraStream.getTracks().forEach(track=>{
-      track.stop();
-    });
-
-    cameraStream = null;
   }
 
-  video.srcObject = null;
-
-  view.classList.remove("live");
-  state.textContent = "Camera inactive";
-  captureButton.classList.remove("visible");
 }
 
 
 /* =========================================================
-   CAPTURE FRAME
-   ========================================================= */
+   CAPTURE
+========================================================= */
 
-function captureFrame(){
+function captureAndPrepare(){
 
-  const video = document.getElementById("cameraVideo");
-  const canvas = document.getElementById("captureCanvas");
-  const preview = document.getElementById("capturePreview");
-  const image = document.getElementById("capturedImage");
-  const state = document.getElementById("cameraState");
+  if(!stream){
 
-  if(!cameraStream || !video.videoWidth){
+    /* If camera isn't open, open it */
 
-    alert("Start the camera first.");
+    openCamera();
+
     return;
   }
 
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
 
-  const context = canvas.getContext("2d");
+  if(video.readyState < 2 ||
+     !video.videoWidth){
+
+    alert(
+      "Camera is starting. Wait one second and press CAPTURE again."
+    );
+
+    return;
+  }
+
+
+  const canvas =
+    document.getElementById("canvas");
+
+  canvas.width =
+    video.videoWidth;
+
+  canvas.height =
+    video.videoHeight;
+
+
+  const context =
+    canvas.getContext("2d");
+
 
   context.drawImage(
     video,
@@ -931,149 +1434,292 @@ function captureFrame(){
     canvas.height
   );
 
-  capturedFrame = canvas.toDataURL(
-    "image/jpeg",
-    .88
+
+  capturedImage =
+    canvas.toDataURL(
+      "image/jpeg",
+      .9
+    );
+
+
+  capturedImageElement.src =
+    capturedImage;
+
+
+  captureLayer.classList.add("show");
+
+
+  scannerState.textContent =
+    "FRAME CAPTURED";
+
+
+  liveStatusText.textContent =
+    "OBSERVATION CAPTURED · READY TO ANALYZE";
+
+
+  captureButton.textContent =
+    "RETAKE";
+
+
+  console.log(
+    "SENTINEL: frame captured successfully."
   );
 
-  image.src = capturedFrame;
+}
 
-  preview.classList.add("show");
 
-  state.textContent = "Frame captured";
+/* =========================================================
+   SELECT SCENARIO
+========================================================= */
+
+function chooseScenario(type){
+
+  selectedScenario = type;
+
+
+  document
+    .querySelectorAll(".scenario")
+    .forEach(item => {
+
+      item.classList.remove("selected");
+
+    });
+
+
+  document
+    .getElementById(type)
+    .classList.add("selected");
+
+
+  const data =
+    DATA[type];
+
+
+  scannerState.textContent =
+    "SCENARIO SELECTED";
+
+
+  liveStatus.classList.add("show");
+
+  liveStatusText.textContent =
+    data.title.toUpperCase();
+
+
+  /* Don't immediately show result.
+     Let ANALYZE create the actual demo flow. */
 
 }
 
 
 /* =========================================================
-   OBSERVATION
-   ========================================================= */
+   ANALYZE
+========================================================= */
 
-function startObservation(){
+function analyzeSituation(){
 
-  const observation = document.getElementById("observationStatus");
-  const observationText = document.getElementById("observationText");
-  const view = document.getElementById("cameraView");
+  if(!selectedScenario){
 
-  const result = document.getElementById("resultCard");
+    alert(
+      "Select a situation first:\n\n" +
+      "Electrical\n" +
+      "Fire / Smoke\n" +
+      "Road Incident"
+    );
 
-  result.classList.remove("show");
-
-  observation.classList.add("show");
-  view.classList.add("analyzing");
-
-  observationText.textContent =
-    capturedFrame
-      ? "ANALYZING CAPTURED OBSERVATION..."
-      : "OBSERVING SITUATION...";
-
-  setTimeout(()=>{
-
-    view.classList.remove("analyzing");
-
-    observationText.textContent =
-      "ASSESSING IMMEDIATE HAZARDS...";
-
-  },900);
-
-  setTimeout(()=>{
-
-    observationText.textContent =
-      "GENERATING NEXT ACTION...";
-
-  },1700);
-
-  setTimeout(()=>{
-
-    observation.classList.remove("show");
-
-    if(currentScenario){
-
-      showResult();
-
-    }else{
-
-      alert(
-        "Observation complete.\n\n" +
-        "For this prototype, select Electrical, Fire / Smoke, or Road Incident to demonstrate the assessment."
-      );
-
-    }
-
-  },2400);
-}
-
-
-/* =========================================================
-   SCENARIO SELECTION
-   ========================================================= */
-
-function selectScenario(type){
-
-  currentScenario = type;
-
-  document.querySelectorAll(".scenario").forEach(button=>{
-    button.classList.remove("active");
-  });
-
-  if(type === "electrical"){
-    document.getElementById("electricalBtn").classList.add("active");
-  }
-
-  if(type === "fire"){
-    document.getElementById("fireBtn").classList.add("active");
-  }
-
-  if(type === "road"){
-    document.getElementById("roadBtn").classList.add("active");
-  }
-
-  showResult();
-}
-
-
-/* =========================================================
-   RESULT
-   ========================================================= */
-
-function showResult(){
-
-  if(!currentScenario) return;
-
-  const data = scenarios[currentScenario];
-
-  document.getElementById("resultTitle").textContent =
-    data.title;
-
-  document.getElementById("riskLevel").textContent =
-    data.risk;
-
-  document.getElementById("guidanceText").textContent =
-    data.guidance;
-
-  document.getElementById("resultCard").classList.add("show");
-
-  document.getElementById("bottomReassess").style.display =
-    "block";
-}
-
-
-/* =========================================================
-   VOICE GUIDANCE
-   ========================================================= */
-
-function hearGuidance(){
-
-  if(!currentScenario){
-
-    const text =
-      "Select a situation first, then SENTINEL can demonstrate its recommended next action.";
-
-    speak(text);
     return;
   }
 
-  speak(scenarios[currentScenario].guidance);
+
+  camera.classList.add("scanning");
+
+
+  scannerState.textContent =
+    "ANALYZING";
+
+
+  liveStatus.classList.add("show");
+
+  liveStatusText.textContent =
+    "OBSERVE → ASSESS → GUIDE";
+
+
+  const analysisText =
+    document.getElementById("analysisText");
+
+
+  analysisText.textContent =
+    capturedImage
+      ? "ANALYZING CAPTURED FRAME"
+      : "ASSESSING SITUATION";
+
+
+  assessment.classList.remove("show");
+
+
+  /* Stage 1 */
+
+  setTimeout(() => {
+
+    analysisText.textContent =
+      "IDENTIFYING POSSIBLE HAZARDS";
+
+  },800);
+
+
+  /* Stage 2 */
+
+  setTimeout(() => {
+
+    analysisText.textContent =
+      "GENERATING NEXT ACTION";
+
+  },1600);
+
+
+  /* Stage 3 */
+
+  setTimeout(() => {
+
+    camera.classList.remove("scanning");
+
+    showAssessment();
+
+  },2400);
+
+}
+
+
+/* =========================================================
+   SHOW ASSESSMENT
+========================================================= */
+
+function showAssessment(){
+
+  const data =
+    DATA[selectedScenario];
+
+
+  document
+    .getElementById("assessmentTitle")
+    .textContent =
+      data.title;
+
+
+  document
+    .getElementById("riskBadge")
+    .textContent =
+      data.risk;
+
+
+  document
+    .getElementById("actionText")
+    .textContent =
+      data.action;
+
+
+  assessment.classList.add("show");
+
+
+  scannerState.textContent =
+    "ASSESSMENT READY";
+
+
+  liveStatusText.textContent =
+    "GUIDANCE READY · REASSESS WHEN CONDITIONS CHANGE";
+
+
+  /* Smoothly bring result into view */
+
+  setTimeout(() => {
+
+    assessment.scrollIntoView({
+      behavior:"smooth",
+      block:"nearest"
+    });
+
+  },100);
+
+}
+
+
+/* =========================================================
+   REASSESS
+========================================================= */
+
+function reassess(){
+
+  if(!selectedScenario){
+
+    alert(
+      "Select a situation first."
+    );
+
+    return;
+  }
+
+
+  camera.classList.add("scanning");
+
+  assessment.classList.remove("show");
+
+
+  scannerState.textContent =
+    "REASSESSING";
+
+
+  liveStatus.classList.add("show");
+
+  liveStatusText.textContent =
+    "CHECKING FOR CHANGES";
+
+
+  const analysisText =
+    document.getElementById("analysisText");
+
+
+  analysisText.textContent =
+    "REASSESSING CURRENT CONDITIONS";
+
+
+  setTimeout(() => {
+
+    analysisText.textContent =
+      "UPDATING SITUATIONAL GUIDANCE";
+
+  },1000);
+
+
+  setTimeout(() => {
+
+    camera.classList.remove("scanning");
+
+    showAssessment();
+
+  },2100);
+
+}
+
+
+/* =========================================================
+   SPEECH
+========================================================= */
+
+function speakGuidance(){
+
+  if(!selectedScenario){
+
+    speak(
+      "Select a situation first to hear SENTINEL guidance."
+    );
+
+    return;
+  }
+
+
+  speak(
+    DATA[selectedScenario].action
+  );
+
 }
 
 
@@ -1081,198 +1727,253 @@ function speak(text){
 
   if(!("speechSynthesis" in window)){
 
-    alert("Voice playback is not supported in this browser.");
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-
-  const utterance =
-    new SpeechSynthesisUtterance(text);
-
-  utterance.rate = .92;
-  utterance.pitch = 1;
-
-  window.speechSynthesis.speak(utterance);
-}
-
-
-/* =========================================================
-   VOICE INPUT
-   ========================================================= */
-
-function activateVoice(){
-
-  const VoiceRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
-
-  const button =
-    document.getElementById("voiceButton");
-
-  if(!VoiceRecognition){
-
     alert(
-      "Voice recognition is not available in this browser."
+      "Voice playback is not supported in this browser."
     );
 
     return;
   }
 
-  if(isListening && recognition){
 
-    recognition.stop();
-    return;
-  }
-
-  recognition = new VoiceRecognition();
-
-  recognition.lang = "en-IN";
-  recognition.continuous = false;
-  recognition.interimResults = false;
-
-  recognition.onstart = ()=>{
-
-    isListening = true;
-
-    button.classList.add("listening");
-    button.textContent = "● LISTENING...";
-
-  };
-
-  recognition.onresult = event =>{
-
-    const transcript =
-      event.results[0][0].transcript.toLowerCase();
-
-    console.log("Voice input:", transcript);
-
-    if(
-      transcript.includes("electric") ||
-      transcript.includes("wire") ||
-      transcript.includes("shock") ||
-      transcript.includes("current")
-    ){
-
-      selectScenario("electrical");
-
-    }else if(
-      transcript.includes("fire") ||
-      transcript.includes("smoke") ||
-      transcript.includes("burning")
-    ){
-
-      selectScenario("fire");
-
-    }else if(
-      transcript.includes("road") ||
-      transcript.includes("accident") ||
-      transcript.includes("vehicle") ||
-      transcript.includes("car") ||
-      transcript.includes("traffic")
-    ){
-
-      selectScenario("road");
-
-    }else{
-
-      alert(
-        "I heard: \"" +
-        transcript +
-        "\"\n\nTry saying: electrical, fire, smoke, road, accident, or traffic."
-      );
-    }
-
-  };
-
-  recognition.onerror = event =>{
-
-    console.error("Voice recognition error:",event.error);
-
-    button.textContent = "🎙 VOICE INPUT";
-    button.classList.remove("listening");
-    isListening = false;
-
-  };
-
-  recognition.onend = ()=>{
-
-    button.textContent = "🎙 VOICE INPUT";
-    button.classList.remove("listening");
-    isListening = false;
-
-  };
-
-  recognition.start();
-}
+  speechSynthesis.cancel();
 
 
-/* =========================================================
-   REASSESS
-   ========================================================= */
-
-function reassess(){
-
-  if(!currentScenario){
-
-    alert("Select a situation first.");
-    return;
-  }
-
-  const observation =
-    document.getElementById("observationStatus");
-
-  const text =
-    document.getElementById("observationText");
-
-  const view =
-    document.getElementById("cameraView");
-
-  observation.classList.add("show");
-  view.classList.add("analyzing");
-
-  text.textContent =
-    "REASSESSING SITUATION...";
-
-  document.getElementById("resultCard")
-    .classList.remove("show");
-
-  setTimeout(()=>{
-
-    text.textContent =
-      "CHECKING FOR CHANGES...";
-
-  },800);
-
-  setTimeout(()=>{
-
-    text.textContent =
-      "UPDATING NEXT ACTION...";
-
-  },1600);
-
-  setTimeout(()=>{
-
-    view.classList.remove("analyzing");
-    observation.classList.remove("show");
-
-    showResult();
-
-  },2300);
-}
+  const utterance =
+    new SpeechSynthesisUtterance(text);
 
 
-/* =========================================================
-   INITIAL STATE
-   ========================================================= */
+  utterance.rate = .9;
 
-document.addEventListener("DOMContentLoaded",()=>{
+  utterance.pitch = 1;
 
-  console.log(
-    "SENTINEL Emergency Copilot prototype ready."
+  utterance.volume = 1;
+
+
+  speechSynthesis.speak(
+    utterance
   );
 
-});
+}
+
+
+/* =========================================================
+   VOICE INPUT
+========================================================= */
+
+function startVoice(){
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+
+  const button =
+    document.getElementById(
+      "voiceButton"
+    );
+
+
+  if(!SpeechRecognition){
+
+    alert(
+      "Voice recognition is unavailable in this browser."
+    );
+
+    return;
+  }
+
+
+  if(listening){
+
+    if(recognition){
+
+      recognition.stop();
+
+    }
+
+    return;
+  }
+
+
+  recognition =
+    new SpeechRecognition();
+
+
+  recognition.lang =
+    "en-IN";
+
+
+  recognition.continuous =
+    false;
+
+
+  recognition.interimResults =
+    false;
+
+
+  recognition.onstart = () => {
+
+    listening = true;
+
+    button.classList.add(
+      "listening"
+    );
+
+    button.textContent =
+      "● LISTENING...";
+
+  };
+
+
+  recognition.onresult =
+    event => {
+
+      const transcript =
+        event
+          .results[0][0]
+          .transcript
+          .toLowerCase();
+
+
+      console.log(
+        "SENTINEL voice:",
+        transcript
+      );
+
+
+      if(
+        transcript.includes("electric") ||
+        transcript.includes("wire") ||
+        transcript.includes("shock") ||
+        transcript.includes("current")
+      ){
+
+        chooseScenario(
+          "electrical"
+        );
+
+
+      }else if(
+        transcript.includes("fire") ||
+        transcript.includes("smoke") ||
+        transcript.includes("burn")
+      ){
+
+        chooseScenario(
+          "fire"
+        );
+
+
+      }else if(
+        transcript.includes("road") ||
+        transcript.includes("accident") ||
+        transcript.includes("traffic") ||
+        transcript.includes("vehicle") ||
+        transcript.includes("car")
+      ){
+
+        chooseScenario(
+          "road"
+        );
+
+
+      }else{
+
+        alert(
+          "I heard:\n\n" +
+          transcript +
+          "\n\nTry saying:\n" +
+          "Fire\n" +
+          "Electrical\n" +
+          "Road accident"
+        );
+
+      }
+
+    };
+
+
+  recognition.onerror =
+    event => {
+
+      console.error(
+        "Voice error:",
+        event.error
+      );
+
+      resetVoice();
+
+    };
+
+
+  recognition.onend =
+    () => {
+
+      resetVoice();
+
+    };
+
+
+  recognition.start();
+
+}
+
+
+function resetVoice(){
+
+  const button =
+    document.getElementById(
+      "voiceButton"
+    );
+
+
+  listening = false;
+
+  button.classList.remove(
+    "listening"
+  );
+
+  button.textContent =
+    "🎙 VOICE INPUT";
+
+}
+
+
+/* =========================================================
+   PAGE CLEANUP
+========================================================= */
+
+window.addEventListener(
+  "beforeunload",
+  () => {
+
+    if(stream){
+
+      stream.getTracks().forEach(
+        track => track.stop()
+      );
+
+    }
+
+    if("speechSynthesis" in window){
+
+      speechSynthesis.cancel();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   DEBUG
+========================================================= */
+
+console.log(
+  "%cSENTINEL READY",
+  "color:#d7ff3f;font-weight:bold;font-size:16px"
+);
+
 </script>
 
 </body>
