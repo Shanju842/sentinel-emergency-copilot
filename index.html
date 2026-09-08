@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07090d">
+<title>SENTINEL — Emergency Copilot</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#07090d;
+  --panel:#10141c;
+  --panel2:#151b25;
+  --text:#f4f7fb;
+  --muted:#8994a6;
+  --accent:#ffb52e;
+  --danger:#ff5b5b;
+  --line:#252c38;
+}
+
+body{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#000;
+  color:var(--text);
+  min-height:100vh;
+}
+
+.app{
+  width:100%;
+  max-width:480px;
+  min-height:100vh;
+  margin:auto;
+  background:var(--bg);
+  position:relative;
+  overflow:hidden;
+}
+
+header{
+  height:74px;
+  padding:22px 22px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  font-size:21px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  color:#8f9aaa;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#46d477;
+  box-shadow:0 0 12px #46d477;
+}
+
+main{
+  padding:10px 20px 35px;
+}
+
+.hero{
+  padding:22px 2px 25px;
+}
+
+.kicker{
+  color:var(--accent);
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+h1{
+  font-size:38px;
+  line-height:1.02;
+  letter-spacing:-1.8px;
+  margin-bottom:14px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+  max-width:390px;
+}
+
+.scan{
+  position:relative;
+  height:300px;
+  border:1px solid var(--line);
+  border-radius:25px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 45%,#263142 0,#111722 30%,#080b10 72%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.scan::before,
+.scan::after{
+  content:"";
+  position:absolute;
+  width:55px;
+  height:55px;
+}
+
+.scan::before{
+  left:18px;
+  top:18px;
+  border-left:2px solid var(--accent);
+  border-top:2px solid var(--accent);
+}
+
+.scan::after{
+  right:18px;
+  bottom:18px;
+  border-right:2px solid var(--accent);
+  border-bottom:2px solid var(--accent);
+}
+
+.camera-icon{
+  width:110px;
+  height:110px;
+  border:2px solid #6f7b8d;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:38px;
+  color:#d9dee6;
+  background:#0b0f15aa;
+}
+
+.scan-label{
+  position:absolute;
+  left:18px;
+  bottom:18px;
+  font-size:10px;
+  letter-spacing:1.7px;
+  color:#aeb7c5;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:15px;
+}
+
+button{
+  border:0;
+  cursor:pointer;
+  color:white;
+  font:inherit;
+}
+
+.primary{
+  grid-column:1/-1;
+  height:62px;
+  border-radius:18px;
+  background:var(--accent);
+  color:#101010;
+  font-weight:800;
+  letter-spacing:1px;
+  font-size:15px;
+  box-shadow:0 10px 35px #ffb52e20;
+}
+
+.secondary{
+  height:52px;
+  border-radius:15px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  color:#c8d0dc;
+}
+
+.modes{
+  margin-top:28px;
+}
+
+.section-title{
+  font-size:11px;
+  color:#7f8998;
+  letter-spacing:1.8px;
+  margin-bottom:12px;
+}
+
+.mode-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.mode{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px 10px;
+  min-height:100px;
+  text-align:left;
+}
+
+.mode strong{
+  display:block;
+  font-size:13px;
+  margin-top:12px;
+}
+
+.mode span{
+  color:#7f8998;
+  font-size:10px;
+}
+
+.result{
+  display:none;
+  margin-top:20px;
+  border:1px solid #35404e;
+  border-radius:20px;
+  padding:20px;
+  background:linear-gradient(145deg,#121923,#0d1118);
+}
+
+.result.show{
+  display:block;
+}
+
+.result-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.result-label{
+  font-size:10px;
+  letter-spacing:1.7px;
+  color:#8e99a9;
+}
+
+.risk{
+  color:var(--accent);
+  font-size:11px;
+  font-weight:700;
+}
+
+.result h2{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.result p{
+  color:#aab4c3;
+  font-size:13px;
+  line-height:1.55;
+}
+
+.guidance{
+  margin-top:17px;
+  padding:15px;
+  background:#191f29;
+  border-radius:14px;
+  border-left:3px solid var(--accent);
+}
+
+.guidance small{
+  display:block;
+  color:var(--accent);
+  font-size:10px;
+  letter-spacing:1.5px;
+  margin-bottom:7px;
+}
+
+.guidance b{
+  font-size:14px;
+  line-height:1.5;
+}
+
+.recheck{
+  width:100%;
+  margin-top:14px;
+  height:48px;
+  border-radius:13px;
+  background:#202733;
+  border:1px solid #303a48;
+  font-weight:700;
+}
+
+footer{
+  padding:25px 2px 0;
+  text-align:center;
+  color:#4e5867;
+  font-size:9px;
+  letter-spacing:1.5px;
+}
+
+@media(min-width:700px){
+  body{padding:30px 0}
+  .app{
+    min-height:850px;
+    border-radius:30px;
+    box-shadow:0 30px 100px #000;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+  <div class="brand">SENTINEL</div>
+  <div class="status">
+    <span class="dot"></span>
+    LOCAL READY
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="kicker">EMERGENCY COPILOT</div>
+  <h1>Know what’s<br>happening.</h1>
+  <p>
+    Observe your surroundings, assess potential hazards,
+    and receive immediate safety-focused guidance.
+  </p>
+</section>
+
+<section class="scan" id="scanArea">
+  <div class="camera-icon">⌾</div>
+  <div class="scan-label" id="scanLabel">
+    CAMERA STANDBY · LOCAL PROCESSING
+  </div>
+</section>
+
+<div class="controls">
+  <button class="primary" onclick="startScan()">START OBSERVATION</button>
+  <button class="secondary" onclick="activateCamera()">CAMERA</button>
+  <button class="secondary" onclick="activateVoice()">VOICE</button>
+</div>
+
+<section class="modes">
+  <div class="section-title">DEMO SCENARIOS</div>
+
+  <div class="mode-grid">
+
+    <button class="mode" onclick="simulate('electrical')">
+      ⚡
+      <strong>Electrical</strong>
+      <span>Hazard</span>
+    </button>
+
+    <button class="mode" onclick="simulate('fire')">
+      🔥
+      <strong>Fire / Smoke</strong>
+      <span>Hazard</span>
+    </button>
+
+    <button class="mode" onclick="simulate('road')">
+      🚗
+      <strong>Road</strong>
+      <span>Incident</span>
+    </button>
+
+  </div>
+</section>
+
+<section class="result" id="result">
+
+  <div class="result-head">
+    <span class="result-label" id="state">ASSESSMENT COMPLETE</span>
+    <span class="risk">SAFETY PRIORITY</span>
+  </div>
+
+  <h2 id="hazardTitle">Potential Hazard</h2>
+
+  <p id="hazardText">
+    SENTINEL has identified a situation requiring attention.
+  </p>
+
+  <div class="guidance">
+    <small>IMMEDIATE GUIDANCE</small>
+    <b id="guidanceText">
+      Move away from the potential hazard and remain in a safe location.
+    </b>
+  </div>
+
+  <button class="recheck" onclick="reassess()">
+    ↻  VERIFY & REASSESS
+  </button>
+
+</section>
+
+<footer>
+  OBSERVE · ASSESS · GUIDE · VERIFY
+</footer>
+
+</main>
+</div>
+
+<script>
+
+let currentScenario = null;
+
+function startScan(){
+
+  const label=document.getElementById("scanLabel");
+  const result=document.getElementById("result");
+
+  result.classList.remove("show");
+
+  label.textContent="OBSERVING · ANALYZING LOCAL INPUT";
+
+  setTimeout(()=>{
+    label.textContent="ASSESSING · SITUATION UNDERSTANDING";
+  },900);
+
+  setTimeout(()=>{
+    label.textContent="READY FOR SCENARIO";
+    document.getElementById("result").classList.add("show");
+    document.getElementById("hazardTitle").textContent="Observation active";
+    document.getElementById("hazardText").textContent=
+      "Select a demonstration scenario below to simulate the SENTINEL assessment and guidance loop.";
+    document.getElementById("guidanceText").textContent=
+      "Choose a scenario to continue.";
+  },1800);
+}
+
+function simulate(type){
+
+  currentScenario=type;
+
+  const result=document.getElementById("result");
+  const label=document.getElementById("scanLabel");
+
+  result.classList.add("show");
+
+  label.textContent="LOCAL ASSESSMENT · ACTIVE";
+
+  if(type==="electrical"){
+    document.getElementById("hazardTitle").textContent="Potential electrical hazard";
+    document.getElementById("hazardText").textContent=
+      "The scene may contain exposed or damaged electrical equipment.";
+    document.getElementById("guidanceText").textContent=
+      "Move away from the area. Do not touch the equipment. Keep others clear and seek appropriate emergency assistance.";
+  }
+
+  if(type==="fire"){
+    document.getElementById("hazardTitle").textContent="Potential fire / smoke hazard";
+    document.getElementById("hazardText").textContent=
+      "Visible environmental cues suggest a possible fire or smoke event.";
+    document.getElementById("guidanceText").textContent=
+      "Move away from the affected area. Avoid smoke-filled spaces. Alert others if safe and seek emergency assistance.";
+  }
+
+  if(type==="road"){
+    document.getElementById("hazardTitle").textContent="Potential road incident";
+    document.getElementById("hazardText").textContent=
+      "The scene may contain moving traffic and an active road-side incident.";
+    document.getElementById("guidanceText").textContent=
+      "Move away from traffic if possible. Stay in a safe visible location and seek appropriate emergency assistance.";
+  }
+
+  document.getElementById("state").textContent="ASSESSMENT COMPLETE";
+}
+
+function reassess(){
+
+  document.getElementById("state").textContent="REASSESSING...";
+  document.getElementById("scanLabel").textContent=
+    "VERIFYING · NEW OBSERVATION";
+
+  setTimeout(()=>{
+    document.getElementById("state").textContent="LOOP ACTIVE";
+    document.getElementById("scanLabel").textContent=
+      "LOCAL PROCESSING · READY";
+
+    document.getElementById("hazardText").textContent=
+      "SENTINEL has completed another observation cycle and is ready to update its assessment.";
+  },1200);
+}
+
+async function activateCamera(){
+
+  const label=document.getElementById("scanLabel");
+
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({
+      video:{facingMode:"environment"},
+      audio:false
+    });
+
+    label.textContent="CAMERA ACTIVE · LOCAL INPUT";
+
+    const video=document.createElement("video");
+    video.autoplay=true;
+    video.playsInline=true;
+    video.srcObject=stream;
+
+    video.style.width="100%";
+    video.style.height="100%";
+    video.style.objectFit="cover";
+
+    const scan=document.getElementById("scanArea");
+
+    scan.innerHTML="";
+    scan.appendChild(video);
+
+    const overlay=document.createElement("div");
+    overlay.className="scan-label";
+    overlay.textContent="LIVE CAMERA · LOCAL OBSERVATION";
+    scan.appendChild(overlay);
+
+  }catch(error){
+    label.textContent="CAMERA ACCESS UNAVAILABLE";
+  }
+}
+
+function activateVoice(){
+
+  if(!("webkitSpeechRecognition" in window || "SpeechRecognition" in window)){
+    alert("Voice recognition is not supported in this browser.");
+    return;
+  }
+
+  const Recognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const recognition=new Recognition();
+
+  recognition.lang="en-IN";
+  recognition.start();
+
+  document.getElementById("scanLabel").textContent=
+    "LISTENING · VOICE INPUT";
+
+  recognition.onresult=function(event){
+
+    const text=event.results[0][0].transcript;
+
+    document.getElementById("scanLabel").textContent=
+      "VOICE RECEIVED · LOCAL INPUT";
+
+    document.getElementById("result").classList.add("show");
+
+    document.getElementById("hazardTitle").textContent=
+      "Voice observation received";
+
+    document.getElementById("hazardText").textContent=
+      '"' + text + '"';
+
+    document.getElementById("guidanceText").textContent=
+      "SENTINEL is ready to assess the reported situation.";
+  };
+}
+
+</script>
+
+</body>
+</html>
